@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">EventNotifier</string>
+    <string name="str_getstart">Get Started</string>
+
+    <!--Login-->
+    <string name="str_login">Login</string>
+    <string name="str_email">Email Address</string>
+    <string name="str_forgot">Forgot Password ?</string>
+    <string name="str_register">Register</string>
+    <string name="str_loginwid">Login With</string>
+    <string name="str_name">Full Name</string>
+    <string name="str_phone">Mobile No.</string>
+    <string name="str_recreatepwd">Confirm Password</string>
+    <string name="str_password">Password</string>
+
+    <!--Errors-->
+    <string name="time_our_error">Time out.</string>
+    <string name="can_not_connect">No Internet Connection Available.</string>
+    <string name="auth_fail">Authentication Failed.</string>
+    <string name="server_error">Server error.</string>
+    <string name="netwotk_error">Unable to connect with network.</string>
+    <string name="parser_error">Parse error.</string>
+    <string name="unknow_error_txt">Unknown Error.</string>
+    <string name="type_a_message">Type a message</string>
+    <string name="title_activity__view__profile">Activity_View_Profile</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="hint_view_message">View Message</string>
+    <string name="processing">Processing...</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="mis_permission_rationale_write_storage">Storage write permission is needed to save the image.</string>
+    <string name="mis_permission_rationale">Storage read permission is needed to pick files.</string>
+    <string name="mis_folder_all">All Images</string>
+    <string name="mis_preview">Preview</string>
+    <string name="mis_msg_no_camera">No system camera found</string>
+    <string name="mis_msg_amount_limit">Select images amount is limit</string>
+    <string name="mis_action_done">Done</string>
+    <string name="mis_action_button_string">%1$s(%2$d/%3$d)</string>
+    <string name="mis_photo_unit">Shot</string>
+    <string name="mis_tip_take_photo">Take photo</string>
+    <string name="mis_error_image_not_exist">Image error</string>
+    <string name="mis_error_no_permission">Has no permission</string>
+    <string name="mis_permission_dialog_title">Permission Deny</string>
+    <string name="mis_permission_dialog_ok">OK</string>
+    <string name="mis_permission_dialog_cancel">CANCEL</string>
+
+
+
+</resources>
