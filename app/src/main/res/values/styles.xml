@@ -17,5 +17,11 @@
         <item name="android:textColorPrimary">@color/colorPrimaryDark</item>
         <item name="android:background">@color/colorWhite</item>
     </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="MyTabLayoutTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
+        <item name="android:textSize">@dimen/text_size_18sp</item>
+    </style>
 
 </resources>

@@ -78,7 +78,7 @@
             android:layout_marginLeft="@dimen/text_20"
             android:layout_marginRight="@dimen/text_20"
             android:layout_marginTop="@dimen/dimens_10dp"
-            android:background="@drawable/bg_event_type"
+            android:background="@drawable/button_splash"
             android:text="@string/str_login"
             android:textColor="@color/colorWhite" />
 
@@ -111,10 +111,15 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:orientation="horizontal">
-
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/iv_facebook"
                 android:src="@drawable/facebook" />
 
             <ImageView

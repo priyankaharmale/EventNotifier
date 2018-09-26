@@ -2,6 +2,9 @@
     <string name="app_name">EventNotifier</string>
     <string name="str_getstart">Get Started</string>
 
+    <string name="facebook_app_id">919646791557287</string>
+
+
     <!--Login-->
     <string name="str_login">Login</string>
     <string name="str_email">Email Address</string>
@@ -44,5 +47,22 @@
     <string name="mis_permission_dialog_cancel">CANCEL</string>
 
 
+    <!--Navigation Menu-->
+    <string name="nav_home">Home</string>
+    <string name="nav_upevent">Upcoming Events</string>
+    <string name="nav_pasteevmt">Past Events</string>
+    <string name="nav_tickets">Tickets</string>
+    <string name="nav_logout">Logout</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_message">Messages</string>
+    <string name="action_list">List</string>
+    <string name="action_map">Map</string>
 
+
+    <!--Forgot Password-->
+    <string name="str_enteremail">Enter Your Email ID</string>
+    <string name="str_submit">Submit</string>
+    <string name="str_cancle">Cancel</string>
 </resources>

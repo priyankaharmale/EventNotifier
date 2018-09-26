@@ -20,7 +20,7 @@
         android:layout_marginLeft="@dimen/text_20"
         android:layout_marginRight="@dimen/text_20"
         android:layout_marginTop="@dimen/dimens_20dp"
-        android:background="@drawable/bg_event_type"
+        android:background="@drawable/button_splash"
         android:text="@string/str_getstart"
         android:textColor="@color/colorWhite" />
 

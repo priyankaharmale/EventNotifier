@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1033474319169",
+    "firebase_url": "https://eventnotifierapp.firebaseio.com",
+    "project_id": "eventnotifierapp",
+    "storage_bucket": "eventnotifierapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1033474319169:android:eb0acc72c6374fb2",
+        "android_client_info": {
+          "package_name": "com.hnweb.eventnotifier"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1033474319169-v5r47qroi2lres59amup9okvm9b8rcms.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hnweb.eventnotifier",
+            "certificate_hash": "2ec5b6e3e0368343c94a1589930f6284d4f33df6"
+          }
+        },
+        {
+          "client_id": "1033474319169-r9q0rdrua5olqotermvdfuvot9eplk3r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBemBPi2rlRZBc0eKKYcOacDBxDacbUm_M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1033474319169-r9q0rdrua5olqotermvdfuvot9eplk3r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

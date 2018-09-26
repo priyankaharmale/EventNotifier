@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 
+import com.hnweb.eventnotifier.contants.AppConstant;
 import com.hnweb.eventnotifier.utils.ConnectionDetector;
 import com.hnweb.eventnotifier.utils.PermissionUtility;
 import com.hnweb.eventnotifier.utils.PostDataTask;
@@ -21,24 +22,27 @@ import com.hnweb.eventnotifier.utils.SharedPrefManager;
 
 import java.util.ArrayList;
 
+import okhttp3.MediaType;
+
 
 /**
- * Created by Priyanka H on 12/06/2018.
+ * Created by Priyanka H on 21/09/2018.
  */
 public class SplashActivity extends AppCompatActivity {
     Button btn_getstart;
     SharedPreferences pref;
-    String useridUser, userType;
+    String useridUser;
     ConnectionDetector connectionDetector;
     private PermissionUtility putility;
     ArrayList<String> permission_list;
-  //  public static final MediaType FORM_DATA_TYPE = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");
+    public static final MediaType FORM_DATA_TYPE = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");
 
     //URL derived from form URL
- //   public static final String URL = "https://docs.google.com/forms/d/e/1FAIpQLSfmpBDW9FNcKQf4Pz9QRbCwcffB3zdEAU6bm8gInLf78Ho-jw/formResponse";
+    public static final String URL = "https://docs.google.com/forms/d/e/1FAIpQLSe2FUNvDUbn9yqfoa9nQ7QFqusRiV3ivTATh7td5x8n6mpcAw/formResponse";
 
     //input element ids found from the live form page
-    public static final String EMAIL_KEY = "entry.76980122";
+    public static final String EMAIL_KEY = "entry.1032817362";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,30 +50,29 @@ public class SplashActivity extends AppCompatActivity {
 
         pref = getApplicationContext().getSharedPreferences("AOP_PREFS", MODE_PRIVATE);
         connectionDetector = new ConnectionDetector(SplashActivity.this);
-
-       /* PostDataTask postDataTask = new PostDataTask();
-
+        PostDataTask postDataTask = new PostDataTask();
         postDataTask.execute(URL, deviceInfo());
-*/
-        runTimePermission();
-
-      //  getdeviceToken();
-      /*  useridUser = pref.getString(AppConstant.KEY_ID, null);
-        userType = pref.getString(AppConstant.KEY_TYPE, null);
-      */  btn_getstart = (Button) findViewById(R.id.btn_getstart);
+        //  runTimePermission();
+        getdeviceToken();
+        useridUser = pref.getString(AppConstant.KEY_ID, null);
+        btn_getstart = (Button) findViewById(R.id.btn_getstart);
         btn_getstart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (connectionDetector.isConnectingToInternet()) {
-                    /*if (useridUser != null && userType.equals("1")) {
-*//*                        Intent intent = new Intent(SplashActivity.this, SplashActivityVendor.class);
+                    if (useridUser == null || useridUser.equals("")) {
+                        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
-                    }*//* else {
-                  */      Intent intentLogin = new Intent(SplashActivity.this, LoginActivity.class);
+                        finish();
+
+                    } else {
+                        Intent intentLogin = new Intent(SplashActivity.this, HomeActivity.class);
                         intentLogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intentLogin);
-                   // }
+                    }
+
+                    // }
                 } else {
                     Toast.makeText(SplashActivity.this, "No Internet Connection, Please try Again!!", Toast.LENGTH_SHORT).show();
                 }
@@ -79,7 +82,7 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
-    private void runTimePermission() {
+   /* private void runTimePermission() {
 
         putility = new PermissionUtility(this);
         permission_list = new ArrayList<String>();
@@ -111,14 +114,14 @@ public class SplashActivity extends AppCompatActivity {
             putility.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
+    }*/
 
-/*
+
     private void getdeviceToken() {
         try {
             String t = SharedPrefManager.getInstance(this).getDeviceToken();
 
-            if (t.equals("") || t==null || t.equals("null")) {
+            if (t.equals("") || t == null || t.equals("null")) {
                 Log.d("Tokan", "t-NULL");
             } else {
                 Log.d("Tokan", t);
@@ -127,7 +130,7 @@ public class SplashActivity extends AppCompatActivity {
             ex.printStackTrace();
         }
     }
-*/
+
 
     public String deviceInfo() {
 

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:id="@+id/home"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/home_navigation"
+            android:title="@string/nav_home" />
+
+    </group>
+    <group
+        android:id="@+id/tasks"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_upevent"
+            android:icon="@drawable/upcoming_events_navigation"
+            android:title="@string/nav_upevent" />
+
+    </group>
+    <group
+        android:id="@+id/offer"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_pasteevmt"
+            android:icon="@drawable/past_events_navigation"
+            android:title="@string/nav_pasteevmt" />
+
+    </group>
+    <group
+        android:id="@+id/history"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_tickets"
+            android:icon="@drawable/tickets_navigation"
+            android:title="@string/nav_tickets" />
+
+    </group>
+    <group
+        android:id="@+id/fav"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_logout"
+
+            android:icon="@drawable/logout_navigation"
+            android:title="@string/nav_logout" />
+
+    </group>
+
+</menu>

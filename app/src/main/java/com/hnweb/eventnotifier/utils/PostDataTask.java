@@ -12,6 +12,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static com.hnweb.eventnotifier.SplashActivity.EMAIL_KEY;
+import static com.hnweb.eventnotifier.SplashActivity.FORM_DATA_TYPE;
 
 /**
  * Created by PC-21 on 16-Apr-18.
@@ -40,7 +41,7 @@ String device = contactData[4];*/
             result = false;
         }
 
-  /*      try {
+        try {
 //Create OkHttpClient for sending request
             OkHttpClient client = new OkHttpClient();
 //Create the request body with the help of Media Type
@@ -53,7 +54,7 @@ String device = contactData[4];*/
             Response response = client.newCall(request).execute();
         } catch (IOException exception) {
             result = false;
-        }*/
+        }
         return result;
     }
 
