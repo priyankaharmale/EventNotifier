@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayoutReg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/dimens_20dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/relative_layout2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dimens_50dp"
+                android:gravity="center">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image_edit"
+                    android:layout_width="100dp"
+                    android:layout_height="@dimen/dimens_100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="@dimen/dimens_20dp"
+                    android:src="@drawable/img_navigation" />
+
+                <ImageView
+                    android:id="@+id/profile_image_edit_upload"
+                    android:layout_width="40dp"
+                    android:layout_height="@dimen/dimens_30dp"
+                    android:layout_alignBottom="@+id/profile_image_edit"
+                    android:layout_alignParentLeft="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/dimens_70dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="@dimen/dimens_20dp"
+                    android:src="@android:drawable/ic_menu_camera" />
+                <LinearLayout
+                    android:id="@+id/view_progress_bar"
+                    android:layout_width="@dimen/dimens_100dp"
+                    android:layout_height="@dimen/dimens_100dp"
+                    android:gravity="center"
+                    tools:ignore="RtlHardcoded">
+
+                    <ProgressBar
+                        android:id="@+id/progress_bar_nav"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimens_50dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:visibility="gone"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/relative_layout2"
+                android:layout_marginLeft="@dimen/dimens_30dp"
+                android:layout_marginRight="@dimen/dimens_30dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/et_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimens_45dp"
+                    android:layout_marginTop="@dimen/dimens_30dp"
+                    android:background="@drawable/bg_textbox"
+                    android:ems="10"
+                    android:hint="@string/str_name"
+                    android:inputType="text"
+                    android:paddingLeft="@dimen/dimens_10dp"
+                    android:textColor="#FFF"
+                    android:textColorHint="@color/colorWhite" />
+
+                <EditText
+                    android:id="@+id/et_email_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimens_45dp"
+                    android:layout_marginTop="@dimen/dimens_10dp"
+                    android:background="@drawable/bg_textbox"
+                    android:ems="10"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/str_email"
+                    android:inputType="textEmailAddress"
+                    android:paddingLeft="@dimen/dimens_10dp"
+                    android:textColor="#FFF"
+                    android:textColorHint="@color/colorWhite" />
+
+                <EditText
+                    android:id="@+id/et_phone_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimens_45dp"
+                    android:layout_marginTop="@dimen/dimens_10dp"
+                    android:background="@drawable/bg_textbox"
+                    android:ems="10"
+                    android:hint="@string/str_phone"
+                    android:inputType="phone"
+                    android:maxLength="10"
+                    android:paddingLeft="@dimen/dimens_10dp"
+                    android:textColor="#FFF"
+                    android:textColorHint="@color/colorWhite" />
+
+
+                <RelativeLayout
+                    android:id="@+id/relative_layout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimens_45dp"
+                    android:layout_marginTop="@dimen/dimens_10dp"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <Button
+                            android:id="@+id/button_experience"
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="@dimen/dimens_10dp"
+                            android:paddingRight="@dimen/dimens_10dp"
+                            android:textColor="#FFF"
+                            android:textColorHint="@color/colorWhite" />
+
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:gravity="right|center">
+
+                        <ImageView
+                            android:id="@+id/down_arrow"
+                            android:layout_width="@dimen/text_size_25sp"
+                            android:layout_height="@dimen/text_size_25sp"
+                            android:layout_marginRight="@dimen/dimens_15dp"
+                            android:src="@drawable/drop_down" />
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/button_update_profile"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/or"
+                    android:layout_marginBottom="@dimen/dimens_10dp"
+                    android:layout_marginTop="@dimen/dimens_20dp"
+                    android:background="@drawable/button_splash"
+                    android:text="Save"
+                    android:textColor="#FFF" />
+
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

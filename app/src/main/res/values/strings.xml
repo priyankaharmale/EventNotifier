@@ -3,6 +3,9 @@
     <string name="str_getstart">Get Started</string>
 
     <string name="facebook_app_id">919646791557287</string>
+    <!--Twitter Auth Key-->
+    <string name="twitter_consumer_key">yt09vJlLqgdcEPOMWPTjRR7Ou</string>
+    <string name="twitter_consumer_secret">KSAi4Jq36qnWWoJef0FbCzJewrpBgxxjQVdYMP8Dqa6p83Vzg2</string>
 
 
     <!--Login-->

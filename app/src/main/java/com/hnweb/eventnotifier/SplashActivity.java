@@ -82,7 +82,7 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
-   /* private void runTimePermission() {
+    private void runTimePermission() {
 
         putility = new PermissionUtility(this);
         permission_list = new ArrayList<String>();
@@ -114,7 +114,7 @@ public class SplashActivity extends AppCompatActivity {
             putility.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }*/
+    }
 
 
     private void getdeviceToken() {

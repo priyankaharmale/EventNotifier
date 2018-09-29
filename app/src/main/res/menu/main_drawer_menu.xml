@@ -41,6 +41,15 @@
 
     </group>
     <group
+        android:id="@+id/changePassword"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/changePasswords"
+            android:icon="@drawable/tickets_navigation"
+            android:title="Change Password" />
+
+    </group>
+    <group
         android:id="@+id/fav"
         android:checkableBehavior="single">
 
@@ -51,5 +60,6 @@
             android:title="@string/nav_logout" />
 
     </group>
+
 
 </menu>

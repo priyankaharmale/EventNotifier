@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -37,13 +38,18 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FirebaseAuth;
 import com.hnweb.eventnotifier.contants.AppConstant;
+import com.hnweb.eventnotifier.fragment.ChangePasswordFragment;
 import com.hnweb.eventnotifier.fragment.HomeFragment;
 import com.hnweb.eventnotifier.utils.ConnectionDetector;
 import com.hnweb.eventnotifier.utils.LoadingDialog;
+import com.hnweb.eventnotifier.utils.ProfileUpdateModel;
 import com.hnweb.eventnotifier.utils.SharedPrefManager;
 
 
@@ -55,12 +61,12 @@ import java.util.Map;
 /* * Created by Priyanka H on 24/09/2018.
  */
 
-public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ProfileUpdateModel.OnCustomStateListener {
     LoadingDialog loadingDialog;
     DrawerLayout drawer;
     private View navHeader;
     public MenuItem liveitemList, liveitemMap;
-    String profile_image, user_name, user_street, user_city, user_id;
+    String profile_image, user_name, user_email, user_id;
     private static final int TIME_DELAY = 2000;
     private static long back_pressed;
     public Toolbar toolbar;
@@ -77,7 +83,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     protected void onResume() {
         super.onResume();
         try {
-            //stateChanged();
+            stateChanged();
             //getNotificationCount();
 
         } catch (Exception ex) {
@@ -103,9 +109,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         user_id = prefs.getString(AppConstant.KEY_ID, null);
         profile_image = prefs.getString(AppConstant.KEY_IMAGE, null);
         user_name = prefs.getString(AppConstant.KEY_NAME, null);
-        user_street = prefs.getString(AppConstant.KEY_STREET, null);
-        user_city = prefs.getString(AppConstant.KEY_CITY, null);
-
+        user_email = prefs.getString(AppConstant.KEY_EMAIL, null);
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -147,11 +151,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 transaction.addToBackStack(null);
                 transaction.replace(R.id.frame_layout, fragment);
                 transaction.commit();
+
   */
+                Intent intent = new Intent(HomeActivity.this, MyProfileActivity.class);
+                startActivity(intent);
             }
         });
         progressBar = navHeader.findViewById(R.id.progress_bar_nav);
-      /*  if (profile_image.equals("") || profile_image == null) {
+        if (profile_image.equals("") || profile_image == null) {
             Glide.with(getApplicationContext())
                     .load(R.drawable.img_navigation)
                     .into(imageViewProfile);
@@ -177,7 +184,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     })
                     .into(imageViewProfile);
             // Glide.with(getApplicationContext()).load(profile_image).into(imageViewProfile);
-        }*/
+        }
 
         if (savedInstanceState == null) {
 
@@ -382,6 +389,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             //   fragment = new MyTaskFragment();
         } else if (id == R.id.nav_tickets) {
             // fragment = new TodaysOfferFragment();
+        } else if (id == R.id.changePasswords) {
+            fragment = new ChangePasswordFragment();
+
         }
 
 
@@ -408,6 +418,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 //   showLogoutAlert();
                 // postTokenRemoved();
 
+                FirebaseAuth.getInstance().signOut();
+                LoginManager.getInstance().logOut();
                 Intent in = new Intent(HomeActivity.this, LoginActivity.class);
                 in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(in);
@@ -486,7 +498,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 */
 
 
-  /*  @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n")
     @Override
     public void stateChanged() {
         //getNotificationCount();
@@ -494,15 +506,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         user_id = prefs.getString(AppConstant.KEY_ID, null);
         profile_image = prefs.getString(AppConstant.KEY_IMAGE, null);
         user_name = prefs.getString(AppConstant.KEY_NAME, null);
-        user_street = prefs.getString(AppConstant.KEY_STREET, null);
-        user_city = prefs.getString(AppConstant.KEY_CITY, null);
+        user_email = prefs.getString(AppConstant.KEY_EMAIL, null);
 
         textViewUserName.setText(user_name);
-        textViewAdrress.setText(user_street + ", " + user_city);
+        textViewAdrress.setText(user_email);
 
         if (profile_image.equals("") || profile_image == null) {
             Glide.with(getApplicationContext())
-                    .load(R.drawable.user_register)
+                    .load(R.drawable.img_navigation)
                     .fitCenter()
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .dontAnimate()
@@ -538,7 +549,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             // Toast.makeText(this, "Notification call", Toast.LENGTH_SHORT).show();
 
         }
-    }*/
+    }
 
 /*
     private void getNotificationCount() {

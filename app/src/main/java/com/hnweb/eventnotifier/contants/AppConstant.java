@@ -33,6 +33,17 @@ public class AppConstant {
     public static final String API_LOGIN_USER = BASE_URL + "login";
     /*=================================================Forgot Password User=========================================================*/
     public static final String API_FORGOTPWD_USER = BASE_URL + "forgotpassword";
+    /*=================================================Login User Facebook=========================================================*/
+    public static final String API_FACEBOOK_LOGIN_USER = BASE_URL + "facebook_login";
+    /*=================================================Login User Twitter=========================================================*/
+    public static final String API_TWITTER_LOGIN_USER = BASE_URL + "twitter_login";
+    /*=================================================Login User Google=========================================================*/
+    public static final String API_GOOGLE_LOGIN_USER = BASE_URL + "google_login";
+    /*=================================================GET USER DETAILS=========================================================*/
+    public static final String  API_GET_USERDEATILS = BASE_URL + "profile";
+    /*=================================================ChANGE Password=========================================================*/
+    public static final String  API_CHANGE_PASSWORD = BASE_URL + "changepassword";
+
 
     public static String dateToString(Date date, String format) {
         SimpleDateFormat df = new SimpleDateFormat(format);

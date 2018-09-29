@@ -111,18 +111,21 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:orientation="horizontal">
+
             <com.facebook.login.widget.LoginButton
                 android:id="@+id/login_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone" />
+
             <ImageView
+                android:id="@+id/iv_facebook"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/iv_facebook"
                 android:src="@drawable/facebook" />
 
             <ImageView
+                android:id="@+id/iv_twitter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimens_10dp"
@@ -132,6 +135,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/iv_google"
                 android:src="@drawable/google" />
 
         </LinearLayout>

@@ -6,8 +6,10 @@ android {
         applicationId "com.hnweb.eventnotifier"
         minSdkVersion 15
         targetSdkVersion 28
+        multiDexEnabled true
+
         versionCode 1
-        versionName "1.0"
+        versionName "1.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -36,6 +38,8 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:28.+'
 
     implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support:multidex:1.0.3'
+
 
     /***********Volley Library************/
     implementation 'com.android.volley:volley:1.0.0'
@@ -53,17 +57,32 @@ dependencies {
 
 
     /************************Notification firabase dependancies************************/
-    implementation 'com.google.firebase:firebase-core:12.0.1'
-    implementation 'com.google.firebase:firebase-auth:12.0.1'
-    implementation 'com.google.firebase:firebase-messaging:12.0.1'
+    implementation 'com.google.firebase:firebase-core:11.8.0'
+    implementation 'com.google.firebase:firebase-auth:11.8.0'
+    implementation 'com.google.firebase:firebase-messaging:11.8.0'
 
     /*Facebook dependancies*/
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
     implementation 'com.firebase:firebase-client-android:2.5.2+'
 
+    /***********************Twitter Authentication**************************/
+    implementation 'com.twitter.sdk.android:twitter-core:3.1.1'
+    implementation 'com.twitter.sdk.android:tweet-ui:3.1.1'
+    implementation 'com.twitter.sdk.android:tweet-composer:3.1.1'
+    implementation 'com.twitter.sdk.android:twitter-mopub:3.1.1'
 
+
+
+   /***********************GooglePlus Authentication************************/
+
+    implementation 'com.google.android.gms:play-services-auth:11.8.0'
+
+    implementation 'com.google.android.gms:play-services:11.8.0'
     //firebase >> mike0777taylor@gmail.com
 
     //facebook Login >>mike222taylor@gmail.com
+
+    //twitter Login >>mike222taylor@gmail.com
+
 }
 apply plugin: 'com.google.gms.google-services'
