@@ -258,7 +258,7 @@ public class Utils {
 
     public static void AlertDialog(FragmentActivity activity, String msg) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle("UberCut")
+        builder.setTitle("Event Notifier App")
                 .setMessage(msg)
                 .setCancelable(false)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/dimens_10dp"
+        android:text="Confirm Date and  Time"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_size_18sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/coloBlack"></View>
+
+    <LinearLayout
+        android:id="@+id/ll_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/text_20"
+            android:layout_weight="0.3"
+            android:text="Date                 "
+            android:textColor="@color/coloBlack"
+            android:textSize="@dimen/text_size_18sp" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/text_20"
+            android:layout_weight="0.5"
+            android:drawableRight="@drawable/calendar_black"
+            android:text="11 Oct 2018"
+            android:textColor="@color/coloBlack"
+
+            android:textSize="@dimen/text_size_18sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="@dimen/dimens_10dp"
+        android:layout_marginTop="@dimen/dimens_10dp"
+
+        android:background="@color/coloBlack"></View>
+
+    <LinearLayout
+        android:id="@+id/ll_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/text_20"
+            android:layout_weight="0.3"
+            android:text="Time                "
+            android:textSize="@dimen/text_size_18sp" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/text_20"
+            android:layout_weight="0.5"
+            android:drawableRight="@drawable/time_black"
+            android:text="7:00 PM"
+            android:textColor="@color/coloBlack"
+            android:textSize="@dimen/text_size_18sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="@dimen/dimens_10dp"
+        android:layout_marginTop="@dimen/dimens_10dp"
+
+        android:background="@color/coloBlack"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/text_20"
+            android:layout_weight="0.3"
+
+            android:text="No of tickets  :"
+            android:textSize="@dimen/text_size_18sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimens_20dp"
+            android:layout_weight="0.7"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_decrease"
+                android:layout_width="@dimen/dimens_40dp"
+                android:layout_height="40dp"
+                android:text="-" />
+
+            <TextView
+                android:id="@+id/integer_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="1"
+                android:textSize="@dimen/text_size_18sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_increase"
+                android:layout_width="@dimen/dimens_40dp"
+                android:layout_height="40dp"
+                android:text="+" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimens_60dp"
+        android:layout_marginTop="@dimen/dimens_40dp"
+        android:weightSum="1">
+
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/bg_title_bar"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimens_20dp"
+                android:layout_weight="0.5"
+                android:text="Total"
+                android:textColor="@color/coloBlack"
+                android:textSize="@dimen/text_size_18sp" />
+
+            <Button
+                android:id="@+id/tv_totalprice"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/dimens_30dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/bg_title_bar"
+                android:text="$100"
+                android:textAllCaps="false"
+                android:textColor="@color/coloBlack"
+                android:textSize="@dimen/text_size_18sp" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_proceed"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_weight="0.5"
+            android:background="@drawable/bg_title_bar"
+
+            android:text="Proceed to Pay"
+            android:textAllCaps="false"
+            android:textColor="@color/coloBlack"
+            android:textSize="@dimen/text_size_18sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

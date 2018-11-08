@@ -54,7 +54,7 @@
     <string name="nav_home">Home</string>
     <string name="nav_upevent">Upcoming Events</string>
     <string name="nav_pasteevmt">Past Events</string>
-    <string name="nav_tickets">Tickets</string>
+    <string name="nav_tickets">Purchase History</string>
     <string name="nav_logout">Logout</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -68,4 +68,22 @@
     <string name="str_enteremail">Enter Your Email ID</string>
     <string name="str_submit">Submit</string>
     <string name="str_cancle">Cancel</string>
+
+
+    <!--Paymnet-->
+
+    <string name="str_credit">Credit Card Details</string>
+    <string name="str_card">Enter Card No</string>
+    <string name="str_yyy">Select</string>
+    <string name="str_cvv">Enter CVV</string>
+    <string name="text_total_amount1">Total Amount</string>
+    <string name="str_proceed">Proceed</string>
+    <string name="str_success">Payment Success</string>
+    <string name="str_your">Your Payment of</string>
+    <string name="str_complte">was successfully Completed</string>
+    <string name="str_backtohomr">Back to home</string>
+    <string name="str_payment">Payment</string>
+    <string name="str_done">Done</string>
+
+
 </resources>

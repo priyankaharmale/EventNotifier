@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -43,10 +44,17 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.hnweb.eventnotifier.contants.AppConstant;
 import com.hnweb.eventnotifier.fragment.ChangePasswordFragment;
 import com.hnweb.eventnotifier.fragment.HomeFragment;
+import com.hnweb.eventnotifier.fragment.PastEventsFragment;
+import com.hnweb.eventnotifier.fragment.PurchaseHistoryFragment;
+import com.hnweb.eventnotifier.fragment.UpcomingEventsFragment;
 import com.hnweb.eventnotifier.utils.ConnectionDetector;
 import com.hnweb.eventnotifier.utils.LoadingDialog;
 import com.hnweb.eventnotifier.utils.ProfileUpdateModel;
@@ -61,7 +69,8 @@ import java.util.Map;
 /* * Created by Priyanka H on 24/09/2018.
  */
 
-public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ProfileUpdateModel.OnCustomStateListener {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ProfileUpdateModel.OnCustomStateListener, GoogleApiClient.OnConnectionFailedListener {
+
     LoadingDialog loadingDialog;
     DrawerLayout drawer;
     private View navHeader;
@@ -78,6 +87,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     ProgressBar progressBar;
     TextView textCartItemCount;
     String mCartItemCount = "";
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onResume() {
@@ -99,7 +109,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
         getdeviceToken();
         connectionDetector = new ConnectionDetector(HomeActivity.this);
 
@@ -160,7 +177,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         progressBar = navHeader.findViewById(R.id.progress_bar_nav);
         if (profile_image.equals("") || profile_image == null) {
             Glide.with(getApplicationContext())
-                    .load(R.drawable.img_navigation)
+                    .load(R.drawable.img_no_pic_navigation)
                     .into(imageViewProfile);
             //Glide.with(getApplicationContext()).load(R.drawable.user_register).into(imageViewProfile);
         } else {
@@ -168,7 +185,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             progressBar.setVisibility(View.VISIBLE);
             Glide.with(getApplicationContext())
                     .load(profile_image)
-                    .placeholder(R.drawable.img_navigation)
+                    .placeholder(R.drawable.img_no_pic_navigation)
                     .listener(new RequestListener<String, GlideDrawable>() {
                         @Override
                         public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
@@ -383,12 +400,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_logout) {
             showLogoutAlert();
         } else if (id == R.id.nav_upevent) {
-            //  fragment = new FavouritesFragment();
+            fragment = new UpcomingEventsFragment();
             //toolbar.setTitle("FAVOURITES");
         } else if (id == R.id.nav_pasteevmt) {
-            //   fragment = new MyTaskFragment();
+            fragment = new PastEventsFragment();
         } else if (id == R.id.nav_tickets) {
-            // fragment = new TodaysOfferFragment();
+            fragment = new PurchaseHistoryFragment();
         } else if (id == R.id.changePasswords) {
             fragment = new ChangePasswordFragment();
 
@@ -409,8 +426,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private void showLogoutAlert() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.app_name);
-        builder.setMessage("Logout Successfully");
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        builder.setMessage("Are you Sure want to Logout");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int i) {
 
@@ -420,6 +437,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
                 FirebaseAuth.getInstance().signOut();
                 LoginManager.getInstance().logOut();
+
+
+                Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+
+
                 Intent in = new Intent(HomeActivity.this, LoginActivity.class);
                 in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(in);
@@ -429,7 +451,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -513,7 +535,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         if (profile_image.equals("") || profile_image == null) {
             Glide.with(getApplicationContext())
-                    .load(R.drawable.img_navigation)
+                    .load(R.drawable.img_no_pic_navigation)
                     .fitCenter()
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .dontAnimate()
@@ -637,4 +659,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public void notificationStateChanged() {
         getNotificationCount();
     }*/
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        // An unresolvable error has occurred and Google APIs (including Sign-In) will not
+        // be available.
+        Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
+    }
 }

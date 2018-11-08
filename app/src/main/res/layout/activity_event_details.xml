@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimens_60dp"
+        android:background="@color/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_backButton"
+                android:layout_width="@dimen/dimens_40dp"
+                android:layout_height="@dimen/dimens_40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="@dimen/dimens_5dp"
+                android:background="@drawable/ic_keyboard_arrow_left_black_24dp" />
+
+
+            <TextView
+                android:id="@+id/tv_groupname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="true"
+                android:text="EVENTS"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_16sp" />
+
+
+            <ImageView
+                android:id="@+id/btn_share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="@dimen/dimens_5dp"
+                android:layout_marginRight="@dimen/dimens_15dp"
+                android:layout_marginTop="@dimen/dimens_10dp"
+
+                android:src="@drawable/share" />
+
+            <Button
+                android:id="@+id/iv_booknow"
+                android:layout_width="@dimen/dimens_45dp"
+                android:layout_height="@dimen/text_size_25sp"
+                android:layout_marginRight="@dimen/dimens_5dp"
+                android:layout_marginTop="@dimen/dimens_10dp"
+                android:layout_toLeftOf="@+id/btn_share"
+                android:background="@drawable/bg_button_book"
+                android:text="Book"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/dimens_8dp" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimens_200dp"
+                android:layout_marginLeft="@dimen/dimens_5dp"
+                android:layout_marginRight="@dimen/dimens_5dp">
+
+                <ImageView
+                    android:id="@+id/iv_eventImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimens_200dp"
+                    android:src="@drawable/event_img_one" />
+
+                <ProgressBar
+                    android:id="@+id/progress_item"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/colorPrimary"
+                    android:indeterminateTintMode="src_atop"
+                    android:visibility="visible" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@color/colorGray">
+
+                <TextView
+                    android:id="@+id/tv_eventName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimens_50dp"
+                    android:padding="@dimen/dimens_10dp"
+                    android:text="Event Name"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimens_50dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/colorGray"
+                    android:padding="@dimen/dimens_10dp"
+                    android:text="$150"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/dimens_10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Start"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_size_16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_eventStartDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimens_10dp"
+                        android:drawableLeft="@drawable/calendar_black"
+                        android:drawablePadding="10dp"
+                        android:text="Fri 18th Oct, 2018"
+                        android:textColor="@color/coloBlack"
+                        android:textSize="@dimen/text_size_16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_eventStartTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimens_10dp"
+                        android:drawableLeft="@drawable/time"
+                        android:drawablePadding="10dp"
+                        android:text="2.00 pm"
+
+                        android:textColor="@color/coloBlack"
+                        android:textSize="@dimen/text_size_16sp" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="1dp"
+                    android:layout_height="@dimen/dimens_120dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerInParent="true"
+                    android:background="@color/coloBlack"></View>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/dimens_10dp"
+                    android:layout_toRightOf="@+id/view"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="End"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_size_16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_eventEndDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimens_10dp"
+                        android:drawableLeft="@drawable/calendar_black"
+                        android:drawablePadding="10dp"
+
+                        android:text="Fri 18th Oct, 2018"
+                        android:textColor="@color/coloBlack"
+                        android:textSize="@dimen/text_size_16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_eventEndTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimens_10dp"
+                        android:drawableLeft="@drawable/time"
+                        android:drawablePadding="10dp"
+                        android:text="10.30 pm"
+
+                        android:textColor="@color/coloBlack"
+                        android:textSize="@dimen/text_size_16sp" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/lightgray"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimens_10dp"
+                    android:text="Description"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_16sp" />
+
+                <TextView
+                    android:id="@+id/tv_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/text_size_25sp"
+                    android:layout_marginLeft="@dimen/dimens_10dp"
+                    android:layout_marginRight="@dimen/dimens_10dp"
+                    android:text="Description"
+                    android:textColor="@color/coloBlack"
+                    android:textSize="@dimen/text_size_16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimens_10dp"
+                    android:text="Venue"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_16sp" />
+
+                <TextView
+                    android:id="@+id/tv_eventAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_margin="@dimen/dimens_10dp"
+                    android:drawableLeft="@drawable/venue"
+                    android:drawablePadding="@dimen/dimens_10dp"
+                    android:text="4205 Timberbook Lane Denver, CO" />
+
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/mapView"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_margin="@dimen/dimens_20dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

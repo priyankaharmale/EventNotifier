@@ -34,9 +34,9 @@
         android:inputType="textPassword"
         android:paddingLeft="@dimen/dimens_10dp"
         android:textAlignment="center"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/coloBlack"
 
-        android:textColorHint="@color/colorWhite" />
+        android:textColorHint="@color/coloBlack" />
 
 
     <EditText
@@ -55,9 +55,9 @@
         android:inputType="textPassword"
         android:paddingLeft="@dimen/dimens_10dp"
         android:textAlignment="center"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/coloBlack"
 
-        android:textColorHint="@color/colorWhite" />
+        android:textColorHint="@color/coloBlack" />
 
     <EditText
         android:id="@+id/et_confirmpassword"
@@ -75,9 +75,9 @@
         android:inputType="textPassword"
         android:paddingLeft="@dimen/dimens_10dp"
         android:textAlignment="center"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/coloBlack"
 
-        android:textColorHint="@color/colorWhite" />
+        android:textColorHint="@color/coloBlack" />
 
     <Button
         android:id="@+id/btn_confirm"

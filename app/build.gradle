@@ -9,7 +9,7 @@ android {
         multiDexEnabled true
 
         versionCode 1
-        versionName "1.4"
+        versionName "2.7"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -46,6 +46,9 @@ dependencies {
     /***********Spreadshit***/
     implementation 'com.squareup.okhttp3:okhttp:3.8.1'
 
+    /****************************Stripe Integartion***********************************/
+    implementation 'com.stripe:stripe-android:2.1.0'
+
 
     /**************************circularImageView***************************************/
     implementation 'de.hdodenhof:circleimageview:2.2.0'
@@ -72,8 +75,12 @@ dependencies {
     implementation 'com.twitter.sdk.android:twitter-mopub:3.1.1'
 
 
+    /******************************Crash analytics**********************************************/
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.3'
 
-   /***********************GooglePlus Authentication************************/
+
+
+    /***********************GooglePlus Authentication************************/
 
     implementation 'com.google.android.gms:play-services-auth:11.8.0'
 
@@ -86,3 +93,4 @@ dependencies {
 
 }
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'io.fabric'

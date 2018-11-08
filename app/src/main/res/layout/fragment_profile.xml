@@ -8,6 +8,39 @@
     android:background="@drawable/splash"
     android:orientation="vertical">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimens_60dp"
+        android:background="@drawable/bg_title_bar"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_backButton"
+                android:layout_width="@dimen/dimens_40dp"
+                android:layout_height="@dimen/dimens_40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="@dimen/dimens_5dp"
+                android:background="@drawable/ic_keyboard_arrow_left_black_24dp"
+                android:tint="@color/colorWhite" />
+
+
+            <TextView
+                android:id="@+id/tv_groupname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="true"
+                android:text="My Profile"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_16sp" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -32,7 +65,8 @@
                     android:layout_gravity="center"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="@dimen/dimens_20dp"
-                    android:src="@drawable/img_navigation" />
+                    android:src="@drawable/img_no_pic_navigation"
+                    />
 
                 <ImageView
                     android:id="@+id/profile_image_edit_upload"
@@ -45,6 +79,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="@dimen/dimens_20dp"
                     android:src="@android:drawable/ic_menu_camera" />
+
                 <LinearLayout
                     android:id="@+id/view_progress_bar"
                     android:layout_width="@dimen/dimens_100dp"
@@ -58,7 +93,7 @@
                         android:layout_height="@dimen/dimens_50dp"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:visibility="gone"/>
+                        android:visibility="gone" />
                 </LinearLayout>
             </RelativeLayout>
 
@@ -80,8 +115,8 @@
                     android:hint="@string/str_name"
                     android:inputType="text"
                     android:paddingLeft="@dimen/dimens_10dp"
-                    android:textColor="#FFF"
-                    android:textColorHint="@color/colorWhite" />
+                    android:textColor="@color/coloBlack"
+                    android:textColorHint="@color/coloBlack" />
 
                 <EditText
                     android:id="@+id/et_email_id"
@@ -94,8 +129,8 @@
                     android:hint="@string/str_email"
                     android:inputType="textEmailAddress"
                     android:paddingLeft="@dimen/dimens_10dp"
-                    android:textColor="#FFF"
-                    android:textColorHint="@color/colorWhite" />
+                    android:textColor="@color/coloBlack"
+                    android:textColorHint="@color/coloBlack" />
 
                 <EditText
                     android:id="@+id/et_phone_no"
@@ -108,8 +143,8 @@
                     android:inputType="phone"
                     android:maxLength="10"
                     android:paddingLeft="@dimen/dimens_10dp"
-                    android:textColor="#FFF"
-                    android:textColorHint="@color/colorWhite" />
+                    android:textColor="@color/coloBlack"
+                    android:textColorHint="@color/coloBlack" />
 
 
                 <RelativeLayout
@@ -132,8 +167,7 @@
                             android:gravity="center_vertical"
                             android:paddingLeft="@dimen/dimens_10dp"
                             android:paddingRight="@dimen/dimens_10dp"
-                            android:textColor="#FFF"
-                            android:textColorHint="@color/colorWhite" />
+                            android:textColor="#FFF" />
 
 
                     </LinearLayout>

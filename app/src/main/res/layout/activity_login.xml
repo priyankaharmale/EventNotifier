@@ -16,6 +16,7 @@
             android:layout_width="@dimen/dimens_150dp"
             android:layout_height="@dimen/dimens_200dp"
             android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dimens_20dp"
             android:src="@drawable/logo_splash" />
 
         <TextView
@@ -27,7 +28,7 @@
             android:layout_marginTop="@dimen/dimens_10dp"
             android:text="@string/str_login"
             android:textAllCaps="true"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/coloBlack"
             android:textSize="@dimen/text_20" />
 
         <EditText
@@ -44,7 +45,7 @@
             android:drawablePadding="@dimen/dimens_20dp"
             android:hint="@string/str_email"
             android:paddingLeft="@dimen/dimens_10dp"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/coloBlack"
             android:textColorHint="@color/colorPrimary" />
 
 
@@ -64,7 +65,7 @@
             android:hint="Password"
             android:inputType="textPassword"
             android:paddingLeft="@dimen/dimens_10dp"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/coloBlack"
 
             android:textColorHint="@color/colorPrimary" />
 
@@ -90,7 +91,7 @@
             android:layout_gravity="center"
             android:layout_margin="@dimen/dimens_10dp"
             android:text="@string/str_forgot"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/coloBlack"
             android:textSize="@dimen/text_size_16dp" />
 
         <TextView
@@ -102,7 +103,7 @@
             android:layout_margin="@dimen/dimens_10dp"
             android:text="@string/str_loginwid"
             android:textAllCaps="true"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/coloBlack"
             android:textSize="@dimen/text_size_16dp" />
 
         <LinearLayout
@@ -133,9 +134,9 @@
                 android:src="@drawable/twitter" />
 
             <ImageView
+                android:id="@+id/iv_google"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/iv_google"
                 android:src="@drawable/google" />
 
         </LinearLayout>
@@ -144,7 +145,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_margin="@dimen/dimens_10dp"
-            android:background="@color/colorWhite"></View>
+            android:textColor="@color/coloBlack"></View>
 
         <TextView
             android:id="@+id/tv_register"
@@ -154,8 +155,8 @@
             android:layout_gravity="center"
             android:layout_margin="@dimen/dimens_10dp"
             android:text="@string/str_register"
-
-            android:textColor="@color/colorWhite"
+            android:textAllCaps="true"
+            android:textColor="@color/coloBlack"
             android:textSize="@dimen/text_size_16dp" />
 
     </LinearLayout>

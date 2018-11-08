@@ -37,6 +37,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.hnweb.eventnotifier.MultipartRequest.MultiPart_Key_Value_Model;
+import com.hnweb.eventnotifier.MultipartRequest.MultipartFileUploaderAsync;
+import com.hnweb.eventnotifier.MultipartRequest.OnEventListener;
 import com.hnweb.eventnotifier.contants.AppConstant;
 import com.hnweb.eventnotifier.utils.AlertUtility;
 import com.hnweb.eventnotifier.utils.AppUtils;
@@ -72,6 +75,7 @@ public class MyProfileActivity extends AppCompatActivity {
     ImageView iv_editprofile;
     String isclick = "1";
     Button button_update_profile;
+    ImageView iv_backButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,7 +84,9 @@ public class MyProfileActivity extends AppCompatActivity {
 
         sharedPreferences = getApplicationContext().getSharedPreferences("AOP_PREFS", MODE_PRIVATE);
         userId = sharedPreferences.getString(AppConstant.KEY_ID, null);
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        iv_backButton = (ImageView) toolbar.findViewById(R.id.iv_backButton);
         et_firstName = (EditText) findViewById(R.id.et_name);
         et_emailName = (EditText) findViewById(R.id.et_email_id);
         et_MobileNo = (EditText) findViewById(R.id.et_phone_no);
@@ -107,7 +113,12 @@ public class MyProfileActivity extends AppCompatActivity {
                 showPictureDialog();
             }
         });
-
+        iv_backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         button_update_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,7 +126,7 @@ public class MyProfileActivity extends AppCompatActivity {
                 if (checkValidation()) {
 
                     if (connectionDetector.isConnectingToInternet()) {
-                        //    updateUserData(camImage);
+                        updateUserData(camImage);
                     } else {
                         Toast.makeText(MyProfileActivity.this, "Please Connect to internet", Toast.LENGTH_LONG).show();
                         // }
@@ -152,7 +163,7 @@ public class MyProfileActivity extends AppCompatActivity {
                                 userEmailId = jsonObject.getString("email_address");
                                 userfirstName = jsonObject.getString("name");
                                 userMobileNo = jsonObject.getString("phone_number");
-                                userPhoto = jsonObject.getString("profile_photo");
+                                userPhoto = jsonObject.getString("profile_picture");
 
                                 et_emailName.setText(userEmailId);
                                 et_firstName.setText(userfirstName);
@@ -160,7 +171,7 @@ public class MyProfileActivity extends AppCompatActivity {
 
 
                                 if (userPhoto.equals("")) {
-                                    Glide.with(MyProfileActivity.this).load(R.drawable.img_navigation).into(iv_profilePic);
+                                    Glide.with(MyProfileActivity.this).load(R.drawable.img_no_pic_navigation).into(iv_profilePic);
                                 } else {
                                     Glide.with(MyProfileActivity.this).load(userPhoto).into(iv_profilePic);
                                 }
@@ -168,7 +179,11 @@ public class MyProfileActivity extends AppCompatActivity {
 
                                 SharedPreferences prefUser = getApplicationContext().getSharedPreferences("AOP_PREFS", MODE_PRIVATE);
                                 SharedPreferences.Editor editorUser = prefUser.edit();
-                                //  editorUser.putString(AppConstant.KEY_PHOTO, userPhoto);
+                                editorUser.putString(AppConstant.KEY_NAME, userfirstName);
+                                editorUser.putString(AppConstant.KEY_EMAIL, userEmailId);
+                                editorUser.putString(AppConstant.KEY_PHONE, userMobileNo);
+                                editorUser.putString(AppConstant.KEY_IMAGE, userPhoto);
+
                                 editorUser.commit();
 
 
@@ -218,7 +233,7 @@ public class MyProfileActivity extends AppCompatActivity {
 
     }
 
-/*
+
     public void updateUserData(String camImage) {
         loadingDialog.show();
 
@@ -226,23 +241,19 @@ public class MyProfileActivity extends AppCompatActivity {
         Map<String, String> fileParams = new HashMap<>();
         if (camImage == null) {
             //  fileParams.put("profile_pic", "");
-
         } else {
-            fileParams.put("rphoto", camImage);
-
+            fileParams.put("profile_photo", camImage);
         }
 
         System.out.println("priya Op" + camImage);
 
         Map<String, String> stringparam = new HashMap<>();
 
-        stringparam.put(AppConstant.KEY_ID, userId);
-        stringparam.put("rfname", et_firstName.getText().toString());
-        stringparam.put("rlname", et_lastName.getText().toString());
-        stringparam.put("rphone", et_MobileNo.getText().toString());
-        stringparam.put("remail", et_emailName.getText().toString());
+        stringparam.put("user_id", userId);
+        stringparam.put("name", et_firstName.getText().toString());
+        stringparam.put("phone_no", et_MobileNo.getText().toString());
 
-        OneObject.setUrl(AppConstant.API_USERUPDATE);
+        OneObject.setUrl(AppConstant.API_UPDATE_USERDEATILS);
         OneObject.setFileparams(fileParams);
         System.out.println("file" + fileParams);
         System.out.println("UTL" + OneObject.toString());
@@ -257,11 +268,10 @@ public class MyProfileActivity extends AppCompatActivity {
                 //    Toast.makeText(getActivity(), "ress" + object, Toast.LENGTH_LONG).show();
 
                 try {
-                    JSONObject jsonObject1response = new JSONObject(object);
+                    final JSONObject jsonObject1response = new JSONObject(object);
                     int flag = jsonObject1response.getInt("message_code");
 
                     if (flag == 1) {
-
 
                         String message = jsonObject1response.getString("message");
                         AlertDialog.Builder builder = new AlertDialog.Builder(MyProfileActivity.this);
@@ -274,13 +284,48 @@ public class MyProfileActivity extends AppCompatActivity {
 
 
                                 et_firstName.setEnabled(false);
-                                et_lastName.setEnabled(false);
                                 et_MobileNo.setEnabled(false);
-                                iv_editprofile.setImageResource(R.drawable.edit_my_profile);
                                 isclick = "1";
-                                getUserDetails();
+                                try {
+
+                                    JSONObject jsonObject = jsonObject1response.getJSONObject("response");
+                                    jsonObject.getString("user_id");
+                                    userEmailId = jsonObject.getString("email_address");
+                                    userfirstName = jsonObject.getString("name");
+                                    userMobileNo = jsonObject.getString("phone_number");
+                                    userPhoto = jsonObject.getString("profile_picture");
+
+                                    et_emailName.setText(userEmailId);
+                                    et_firstName.setText(userfirstName);
+                                    et_MobileNo.setText(userMobileNo);
+
+
+                                    if (userPhoto.equals("")) {
+                                        Glide.with(MyProfileActivity.this).load(R.drawable.img_no_pic_navigation).into(iv_profilePic);
+                                    } else {
+                                        Glide.with(MyProfileActivity.this).load(userPhoto).into(iv_profilePic);
+                                    }
+
+
+                                    SharedPreferences prefUser = getApplicationContext().getSharedPreferences("AOP_PREFS", MODE_PRIVATE);
+                                    SharedPreferences.Editor editorUser = prefUser.edit();
+                                    editorUser.putString(AppConstant.KEY_NAME, userfirstName);
+                                    editorUser.putString(AppConstant.KEY_EMAIL, userEmailId);
+                                    editorUser.putString(AppConstant.KEY_PHONE, userMobileNo);
+                                    editorUser.putString(AppConstant.KEY_IMAGE, userPhoto);
+
+                                    editorUser.commit();
+
+                                    getUserDetails();
+
+                                } catch (JSONException e) {
+
+                                }
+
 
                             }
+
+
                         });
                         android.support.v7.app.AlertDialog alertDialog = builder.create();
                         alertDialog.show();
@@ -315,7 +360,7 @@ public class MyProfileActivity extends AppCompatActivity {
         someTask.execute();
         return;
     }
-*/
+
 
     private void showPictureDialog() {
         android.app.AlertDialog.Builder pictureDialog = new android.app.AlertDialog.Builder(MyProfileActivity.this);

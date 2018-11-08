@@ -234,7 +234,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                     String user_name = jsonObject.getString("name");
                                                     String user_email = jsonObject.getString("email_address");
                                                     String user_phone = jsonObject.getString("phone_number");
-                                                    String user_image = jsonObject.getString("profile_photo");
+                                                    String user_image = jsonObject.getString("profile_picture");
                                                     String device_type = jsonObject.getString("device_type");
                                                     String user_city = jsonObject.getString("city");
                                                     String user_state = jsonObject.getString("state");
@@ -529,6 +529,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
+                            Log.w(TAG, "signInWithCredential", task.getException());
                             Toast.makeText(LoginActivity.this, "Success.",
                                     Toast.LENGTH_SHORT).show();
                             String uid = task.getResult().getUser().getUid();
@@ -786,6 +787,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
                         } else {
+                            Log.w(TAG, "success", task.getException());
                             Toast.makeText(LoginActivity.this, "Success.",
                                     Toast.LENGTH_SHORT).show();
                             String uid = task.getResult().getUser().getUid();
@@ -841,7 +843,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                     String user_name = jsonObject.getString("name");
                                                     String user_email = jsonObject.getString("email_address");
                                                     String user_phone = jsonObject.getString("phone_number");
-                                                    String user_image = jsonObject.getString("profile_photo");
+                                                    String user_image = jsonObject.getString("profile_picture");
                                                     String device_type = jsonObject.getString("device_type");
                                                     String user_city = jsonObject.getString("city");
                                                     String user_state = jsonObject.getString("state");

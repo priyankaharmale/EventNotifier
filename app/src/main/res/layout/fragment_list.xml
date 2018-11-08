@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/splash"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -14,7 +15,7 @@
             android:id="@+id/linearLayout_search"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimens_45dp"
-            android:background="@color/blue"
+            android:background="@color/colorGray"
             android:orientation="horizontal"
 
             android:weightSum="1">
@@ -42,16 +43,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimens_10dp"
                     android:text="Search"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_16sp" />
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-
                 android:orientation="horizontal">
 
                 <ImageView
@@ -68,20 +69,21 @@
                     tools:ignore="NewApi" />
 
                 <TextView
+                    android:id="@+id/tv_filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimens_10dp"
                     android:text="Filter"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_16sp" />
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_datepicker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-
                 android:orientation="horizontal">
 
                 <ImageView
@@ -100,13 +102,13 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimens_10dp"
-                    android:src="@drawable/drop_down"
                     android:layout_marginRight="10dp"
+                    android:layout_marginTop="@dimen/dimens_10dp"
                     android:paddingBottom="@dimen/dimens_10dp"
                     android:paddingTop="@dimen/dimens_10dp"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/text_size_16sp" />
+                    android:src="@drawable/drop_down"
+                    android:textSize="@dimen/text_size_16sp"
+                    android:tint="@color/colorPrimary" />
 
             </LinearLayout>
         </LinearLayout>
@@ -146,7 +148,7 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/dimens_10dp"
             android:gravity="center"
-            android:text=""
+            android:text="No Events Available"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_20"
             android:textStyle="bold"

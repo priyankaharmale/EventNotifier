@@ -11,13 +11,13 @@
         android:layout_margin="@dimen/dimens_10dp"
         android:gravity="center"
         android:text="@string/str_forgot"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/coloBlack"
         android:textSize="@dimen/text_size_18sp" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/colorWhite"></View>
+        android:background="@color/coloBlack"></View>
 
     <TextView
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
         android:layout_marginRight="@dimen/text_20"
         android:layout_marginTop="@dimen/dimens_10dp"
         android:text="@string/str_enteremail"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/coloBlack"
         android:textSize="@dimen/text_size_18sp" />
 
     <EditText
@@ -42,8 +42,8 @@
         android:hint="@string/str_email"
         android:inputType="text"
         android:paddingLeft="@dimen/dimens_10dp"
-        android:textColor="@color/colorWhite"
-        android:textColorHint="@color/colorWhite" />
+        android:textColor="@color/coloBlack"
+        android:textColorHint="@color/coloBlack" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -60,7 +60,7 @@
             android:layout_marginTop="@dimen/dimens_10dp"
             android:layout_toLeftOf="@+id/view"
             android:text="@string/str_submit"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/coloBlack"
             android:textSize="@dimen/text_size_18dp" />
 
         <View
@@ -78,7 +78,7 @@
             android:layout_marginTop="@dimen/dimens_10dp"
             android:layout_toRightOf="@+id/view"
             android:text="@string/str_cancle"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/coloBlack"
             android:textSize="@dimen/text_size_18dp" />
     </RelativeLayout>
 </LinearLayout>
