@@ -107,7 +107,7 @@ public class PastEventsFragment extends Fragment implements View.OnClickListener
 
         imageViewSearch.setOnClickListener(this);
         ll_datepicker.setOnClickListener(this);
-                linearLayout = view.findViewById(R.id.linearLayout_search);
+        linearLayout = view.findViewById(R.id.linearLayout_search);
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
         searchView = view.findViewById(R.id.searchView_my_task);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
@@ -149,7 +149,14 @@ public class PastEventsFragment extends Fragment implements View.OnClickListener
                         }
                     });
                 }
-                eventsAdaptor.getFilter().filter(newText.toString());
+                try {
+                    eventsAdaptor.getFilter().filter(newText.toString());
+
+                }
+                catch (NullPointerException e)
+                {
+
+                }
 
                 return true;
             }
@@ -578,6 +585,8 @@ public class PastEventsFragment extends Fragment implements View.OnClickListener
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
+        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+
     }
 
     public void fiterByDate(final String outputDateFormat) {

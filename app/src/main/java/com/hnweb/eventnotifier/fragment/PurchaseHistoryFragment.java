@@ -62,9 +62,7 @@ public class PurchaseHistoryFragment extends Fragment implements View.OnClickLis
 
     RadioButton radioButton_All, radioButton_today, radioButton_Tommorrow, radioButton_weekend;
     ImageView imageViewFilter, imageViewSearch;
-    String value_date_filter = "";
-    String replaceArrayListCategory = "";
-    String category_id = "";
+
     LinearLayout linearLayout;
     SearchView searchView;
     String str_apply = "";
@@ -72,7 +70,6 @@ public class PurchaseHistoryFragment extends Fragment implements View.OnClickLis
     private ArrayList<Event> eventsArrayList = null;
     PurchaseHistoryAdaptor eventsAdaptor;
     LinearLayout ll_filter, ll_datepicker;
-    Dialog dialog;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -118,6 +115,7 @@ public class PurchaseHistoryFragment extends Fragment implements View.OnClickLis
         searchView.setMaxWidth(Integer.MAX_VALUE);
         // Add Text Change Listener to EditText
         mCloseButton = searchView.findViewById(R.id.search_close_btn);
+        mCloseButton.setVisibility(View.VISIBLE);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -125,7 +123,7 @@ public class PurchaseHistoryFragment extends Fragment implements View.OnClickLis
                     ///linearLayout.setVisibility(View.VISIBLE);
                     //searchView.setVisibility(View.GONE);
                     // mCloseButton.setVisibility(query.isEmpty() ? View.GONE : View.VISIBLE);
-                    mCloseButton.setVisibility(View.VISIBLE);
+                    //  mCloseButton.setVisibility(View.VISIBLE);
                     mCloseButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -144,7 +142,7 @@ public class PurchaseHistoryFragment extends Fragment implements View.OnClickLis
                 if (newText.toString().trim().length() == 0) {
                     //linearLayout.setVisibility(View.VISIBLE);
                     //searchView.setVisibility(View.GONE);
-                    mCloseButton.setVisibility(View.VISIBLE);
+                    //    mCloseButton.setVisibility(View.VISIBLE);
                     mCloseButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -153,7 +151,12 @@ public class PurchaseHistoryFragment extends Fragment implements View.OnClickLis
                         }
                     });
                 }
-                eventsAdaptor.getFilter().filter(newText.toString());
+                try {
+                    eventsAdaptor.getFilter().filter(newText.toString());
+
+                } catch (NullPointerException e) {
+
+                }
 
                 return true;
             }
@@ -241,6 +244,8 @@ public class PurchaseHistoryFragment extends Fragment implements View.OnClickLis
                                     events.setCreated_on(jsonObject.getString("created_on"));
                                     events.setEvent_price(jsonObject.getString("price"));
                                     events.setNo_of_tickets(jsonObject.getString("no_of_tickets"));
+                                    events.setTransaction_date(jsonObject.getString("transaction_date"));
+                                    events.setTotal_price(jsonObject.getString("total_price"));
                                     eventsArrayList.add(events);
                                     Log.d("ArraySize", String.valueOf(eventsArrayList.size()));
 
@@ -251,7 +256,7 @@ public class PurchaseHistoryFragment extends Fragment implements View.OnClickLis
                             } else {
                                 msg = jobj.getString("message");
                                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                                builder.setMessage("No data Available")
+                                builder.setMessage("No Purchase History Available")
                                         .setCancelable(false)
                                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
@@ -261,6 +266,7 @@ public class PurchaseHistoryFragment extends Fragment implements View.OnClickLis
                                 alert.show();
                                 recyclerViewPostedList.setVisibility(View.GONE);
                                 textViewList.setVisibility(View.VISIBLE);
+                                textViewList.setText("No Purchase History Available");
                             }
                         } catch (JSONException e) {
                             System.out.println("jsonexeption" + e.toString());

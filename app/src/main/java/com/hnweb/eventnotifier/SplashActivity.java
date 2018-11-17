@@ -86,7 +86,7 @@ public class SplashActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (connectionDetector.isConnectingToInternet()) {
                     if (useridUser == null || useridUser.equals("")) {
-                        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                        Intent intent = new Intent(SplashActivity.this, LoginActivityDemo.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         finish();

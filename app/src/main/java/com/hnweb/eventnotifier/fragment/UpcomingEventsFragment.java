@@ -164,7 +164,13 @@ public class UpcomingEventsFragment extends Fragment implements View.OnClickList
                         }
                     });
                 }
-                eventsAdaptor.getFilter().filter(newText.toString());
+
+                try {
+                    eventsAdaptor.getFilter().filter(newText.toString());
+
+                } catch (NullPointerException e) {
+
+                }
 
                 return true;
             }
@@ -705,6 +711,8 @@ public class UpcomingEventsFragment extends Fragment implements View.OnClickList
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+
     }
 
     public void fiterByDate(final String outputDateFormat) {
@@ -724,6 +732,9 @@ public class UpcomingEventsFragment extends Fragment implements View.OnClickList
                             String msg = jobj.getString("message");
                             Log.e("FLag", message_code + " :: " + msg);
                             if (message_code == 1) {
+                                recyclerViewPostedList.setVisibility(View.VISIBLE);
+                                textViewList.setVisibility(View.GONE);
+
                                 JSONArray userdetails = jobj.getJSONArray("response");
                                 eventsArrayList = new ArrayList<Event>();
                                 Log.d("ArrayLengthNails", String.valueOf(userdetails.length()));
@@ -749,6 +760,8 @@ public class UpcomingEventsFragment extends Fragment implements View.OnClickList
                                 eventsAdaptor = new EventsAdaptor(getActivity(), eventsArrayList, "1");
                                 recyclerViewPostedList.setAdapter(eventsAdaptor);
                             } else {
+                                recyclerViewPostedList.setVisibility(View.GONE);
+                                textViewList.setVisibility(View.VISIBLE);
                                 msg = jobj.getString("message");
                                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                                 builder.setMessage(msg)
@@ -759,7 +772,8 @@ public class UpcomingEventsFragment extends Fragment implements View.OnClickList
                                         });
                                 AlertDialog alert = builder.create();
                                 alert.show();
-                                recyclerViewPostedList.setVisibility(View.GONE);
+
+
                             }
                         } catch (JSONException e) {
                             System.out.println("jsonexeption" + e.toString());

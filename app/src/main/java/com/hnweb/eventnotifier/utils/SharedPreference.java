@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
 import com.hnweb.eventnotifier.LoginActivity;
+import com.hnweb.eventnotifier.LoginActivityDemo;
 import com.hnweb.eventnotifier.contants.AppConstant;
 
 
@@ -111,7 +112,7 @@ public class SharedPreference {
             public void onClick(DialogInterface dialog, int i) {
 
                 SharedPreference.clearSharedPreference(context);
-                Intent in = new Intent(context, LoginActivity.class);
+                Intent in = new Intent(context, LoginActivityDemo.class);
                 in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 context.startActivity(in);
                 dialog.cancel();

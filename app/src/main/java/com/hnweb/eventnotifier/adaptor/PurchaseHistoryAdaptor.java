@@ -73,8 +73,9 @@ public class PurchaseHistoryAdaptor extends RecyclerView.Adapter<PurchaseHistory
         String eventEndTime = eventsList.get(i).getEvent_endtime();
         String evetPhoto = eventsList.get(i).getImage();
         String eventLocation = eventsList.get(i).getEvent_place();
-        String eventPrice = eventsList.get(i).getEvent_price();
+        String eventPrice = eventsList.get(i).getTotal_price();
         String noOfTickets = eventsList.get(i).getNo_of_tickets();
+        String transaction_date = eventsList.get(i).getTransaction_date();
 
         drawable = ContextCompat.getDrawable(context, R.drawable.default_img_event);
 
@@ -92,7 +93,7 @@ public class PurchaseHistoryAdaptor extends RecyclerView.Adapter<PurchaseHistory
 
         }
 
-        if (eventDate.equals("")) {
+     /*   if (eventDate.equals("")) {
             holder.textViewDate.setText(" - ");
         } else {
 
@@ -122,6 +123,48 @@ public class PurchaseHistoryAdaptor extends RecyclerView.Adapter<PurchaseHistory
                 SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm:ss");
                 SimpleDateFormat sdf2 = new SimpleDateFormat("hh:mm a");
                 Date time = sdf1.parse(eventStartTime);
+                String endTime = sdf2.format(time);
+
+                holder.textViewTime.setText(endTime);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+*/
+
+        if (transaction_date.equals("")) {
+            holder.textViewDate.setText(" - ");
+        } else {
+
+            String pattern = "yyyy-MM-dd";
+
+            SimpleDateFormat format1 = new SimpleDateFormat(pattern);
+            SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+
+
+            Date date = null;
+            try {
+                date = format1.parse(transaction_date);
+                str_startDate = formatter.format(date);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
+            holder.textViewDate.setText(str_startDate);
+        }
+        if (transaction_date.equals("")) {
+            holder.textViewTime.setText(" - ");
+        } else {
+
+            try {
+                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                SimpleDateFormat sdf2 = new SimpleDateFormat("hh:mm a");
+                Date time = sdf1.parse(transaction_date);
                 String endTime = sdf2.format(time);
 
                 holder.textViewTime.setText(endTime);

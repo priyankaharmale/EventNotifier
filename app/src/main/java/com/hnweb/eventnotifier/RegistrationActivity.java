@@ -57,7 +57,7 @@ public class RegistrationActivity extends AppCompatActivity {
         tv_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+                Intent intent = new Intent(RegistrationActivity.this, LoginActivityDemo.class);
                 startActivity(intent);
                 finish();
             }
@@ -139,7 +139,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                             public void onClick(DialogInterface dialog, int id) {
 
 
-                                                Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+                                                Intent intent = new Intent(RegistrationActivity.this, LoginActivityDemo.class);
                                                 startActivity(intent);
                                                 finish();
                                                 dialog.dismiss();

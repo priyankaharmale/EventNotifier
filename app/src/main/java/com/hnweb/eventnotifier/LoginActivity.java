@@ -47,6 +47,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.hnweb.eventnotifier.contants.AppConstant;
 import com.hnweb.eventnotifier.utils.AlertUtility;
@@ -103,7 +104,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private CallbackManager callbackManager;
     TwitterAuthClient mTwitterAuthClient;
     private GoogleApiClient mGoogleApiClient;
-
+    private FirebaseAuth.AuthStateListener mAuthListener;
+   FirebaseUser user;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -152,6 +154,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 .build();
 // Initialize FirebaseAuth
         mFirebaseAuth = FirebaseAuth.getInstance();
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                user    = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                } else {
+                    // User is signed out
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
+            }
+        };
         //Facebook Callback manager
         callbackManager = CallbackManager.Factory.create();
         //Twitter intialization
@@ -772,6 +788,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGooogle:" + acct.getId());
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+
         mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -790,9 +807,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Log.w(TAG, "success", task.getException());
                             Toast.makeText(LoginActivity.this, "Success.",
                                     Toast.LENGTH_SHORT).show();
-                            String uid = task.getResult().getUser().getUid();
-                            String name = task.getResult().getUser().getDisplayName();
-                            String email = task.getResult().getUser().getEmail();
+                            String uid = user.getUid();
+                            String name = user.getDisplayName();
+                            String email = user.getEmail();
 
                             String image = task.getResult().getUser().getPhotoUrl().toString();
                             String phone = task.getResult().getUser().getPhoneNumber();
@@ -804,6 +821,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }
                     }
                 });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mFirebaseAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mFirebaseAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 
     @Override

@@ -1,9 +1,43 @@
 package com.hnweb.eventnotifier.bo;
 
 public class Event {
-    String  id,address,event_price,no_of_tickets,event_name,event_descr,event_date,event_starttime,event_endtime,event_place,image,status,created_by,created_on,latitude,longitude;
+    String  id;
+    String address;
+    String transaction_date;
+    String event_price;
+    String no_of_tickets;
+    String event_name;
+    String event_descr;
+    String event_date;
+
+    public String getTotal_price() {
+        return total_price;
+    }
+
+    public void setTotal_price(String total_price) {
+        this.total_price = total_price;
+    }
+
+    String event_starttime;
+    String total_price;
+    String event_endtime;
+    String event_place;
+    String image;
+    String status;
+    String created_by;
+    String created_on;
+    String latitude;
+    String longitude;
     public String getId() {
         return id;
+    }
+
+    public String getTransaction_date() {
+        return transaction_date;
+    }
+
+    public void setTransaction_date(String transaction_date) {
+        this.transaction_date = transaction_date;
     }
 
     public String getNo_of_tickets() {

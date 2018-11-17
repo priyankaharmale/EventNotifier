@@ -442,7 +442,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 Auth.GoogleSignInApi.signOut(mGoogleApiClient);
 
 
-                Intent in = new Intent(HomeActivity.this, LoginActivity.class);
+                Intent in = new Intent(HomeActivity.this, LoginActivityDemo.class);
                 in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(in);
                 finish();

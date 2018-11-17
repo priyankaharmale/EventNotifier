@@ -49,15 +49,16 @@
 
             <Button
                 android:id="@+id/iv_booknow"
-                android:layout_width="@dimen/dimens_45dp"
-                android:layout_height="@dimen/text_size_25sp"
+                android:layout_width="@dimen/dimens_50dp"
+                android:layout_height="@dimen/dimens_30dp"
                 android:layout_marginRight="@dimen/dimens_5dp"
                 android:layout_marginTop="@dimen/dimens_10dp"
                 android:layout_toLeftOf="@+id/btn_share"
                 android:background="@drawable/bg_button_book"
                 android:text="Book"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/dimens_8dp" />
+                android:textSize="@dimen/text_size_12sp"
+                android:textStyle="bold" />
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
@@ -79,8 +80,9 @@
                 <ImageView
                     android:id="@+id/iv_eventImage"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimens_200dp"
-                    android:src="@drawable/event_img_one" />
+                    android:layout_height="fill_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/default_img_event_details" />
 
                 <ProgressBar
                     android:id="@+id/progress_item"
