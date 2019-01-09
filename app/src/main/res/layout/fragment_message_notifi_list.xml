@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/splash">
+
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_message_chat_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dimens_10dp"/>
+    <TextView
+            android:text="No Message Chat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:visibility="gone"
+            android:textSize="@dimen/text_20"
+            android:textColor="@color/colorWhite"
+            android:id="@+id/textView_empty"/>
+
+
+</RelativeLayout>

@@ -65,8 +65,7 @@
                     android:layout_gravity="center"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="@dimen/dimens_20dp"
-                    android:src="@drawable/img_no_pic_navigation"
-                    />
+                    android:src="@drawable/img_no_pic_navigation" />
 
                 <ImageView
                     android:id="@+id/profile_image_edit_upload"

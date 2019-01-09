@@ -495,7 +495,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                         login(email, password);
 
-                        Toast.makeText(LoginActivity.this, "Login ", Toast.LENGTH_SHORT).show();
 
                     } else {
                         Utils.myToast1(LoginActivity.this);

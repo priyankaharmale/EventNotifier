@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/splash"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/splash">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,10 +21,10 @@
             android:weightSum="1">
 
             <LinearLayout
+                android:id="@+id/ll_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-
                 android:orientation="horizontal">
 
                 <ImageView
@@ -35,7 +35,6 @@
                     android:layout_marginRight="@dimen/dimens_10dp"
                     android:paddingBottom="@dimen/dimens_10dp"
                     android:paddingTop="@dimen/dimens_10dp"
-                    android:visibility="visible"
                     app:srcCompat="@drawable/search" />
 
                 <TextView
@@ -57,12 +56,9 @@
 
                 <ImageView
                     android:id="@+id/imageView_filter_booked"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/dimens_40dp"
                     android:layout_height="@dimen/dimens_40dp"
-                    android:layout_gravity="center"
                     android:layout_marginRight="@dimen/dimens_10dp"
-                    android:background="?android:selectableItemBackgroundBorderless"
-                    android:clickable="true"
                     android:paddingBottom="@dimen/dimens_10dp"
                     android:paddingTop="@dimen/dimens_10dp"
                     app:srcCompat="@drawable/filter"
@@ -88,12 +84,10 @@
 
                 <ImageView
                     android:id="@+id/imageView_calender"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/dimens_40dp"
                     android:layout_height="@dimen/dimens_40dp"
                     android:layout_gravity="center"
                     android:layout_marginRight="@dimen/dimens_10dp"
-                    android:background="?android:selectableItemBackgroundBorderless"
-                    android:clickable="true"
                     android:paddingBottom="@dimen/dimens_10dp"
                     android:paddingTop="@dimen/dimens_10dp"
                     app:srcCompat="@drawable/calendar"

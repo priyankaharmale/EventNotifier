@@ -72,8 +72,7 @@
             android:orientation="vertical">
 
             <RelativeLayout
-                android:layout_width="match_parent"
-
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/dimens_200dp"
                 android:layout_marginLeft="@dimen/dimens_5dp"
                 android:layout_marginRight="@dimen/dimens_5dp">
@@ -82,7 +81,7 @@
                     android:id="@+id/iv_eventImage"
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
-                    android:scaleType="centerInside"
+                    android:scaleType="fitXY"
                     android:src="@drawable/default_img_event_details" />
 
                 <ProgressBar

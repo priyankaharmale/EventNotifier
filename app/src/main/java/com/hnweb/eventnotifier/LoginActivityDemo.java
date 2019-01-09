@@ -188,7 +188,7 @@ public class LoginActivityDemo extends AppCompatActivity implements View.OnClick
             @Override
             public void onCancel() {
                 //AlertUtility.showAlert(RegisterActivity.this, false, "Facebook Login Canceled by User");
-                Toast.makeText(LoginActivityDemo.this, "Facebook Login Canceled by User", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivityDemo.this, "Facebook Login Cancelled by User", Toast.LENGTH_SHORT).show();
             }
 
             @Override

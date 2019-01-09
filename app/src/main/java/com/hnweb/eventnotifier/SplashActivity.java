@@ -70,7 +70,7 @@ public class SplashActivity extends AppCompatActivity {
         connectionDetector = new ConnectionDetector(SplashActivity.this);
         PostDataTask postDataTask = new PostDataTask();
         postDataTask.execute(URL, deviceInfo());
-        //  runTimePermission();
+          runTimePermission();
         myLocationListener = new MyLocationListener(this);
         if (locationSet.checkPermission(android.Manifest.permission.ACCESS_FINE_LOCATION, this, this)) {
             fetchLocationData();

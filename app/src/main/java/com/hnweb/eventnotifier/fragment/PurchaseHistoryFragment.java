@@ -109,7 +109,7 @@ public class PurchaseHistoryFragment extends Fragment implements View.OnClickLis
         ll_filter.setVisibility(View.GONE);
         ll_datepicker.setVisibility(View.GONE);
         linearLayout = view.findViewById(R.id.linearLayout_search);
-        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        SearchManager searchManager = ( SearchManager ) getActivity().getSystemService(Context.SEARCH_SERVICE);
         searchView = view.findViewById(R.id.searchView_my_task);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
         searchView.setMaxWidth(Integer.MAX_VALUE);
@@ -132,7 +132,20 @@ public class PurchaseHistoryFragment extends Fragment implements View.OnClickLis
                         }
                     });
                 }
-                eventsAdaptor.getFilter().filter(query.toString());
+                try {
+                    if (eventsArrayList.size() == 0) {
+                        Toast.makeText(getActivity(), "No match Found", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        eventsAdaptor.getFilter().filter(query.toString());
+
+                    }
+
+                }catch (NullPointerException e)
+                {
+
+                }
+
                 return false;
             }
 
@@ -152,8 +165,13 @@ public class PurchaseHistoryFragment extends Fragment implements View.OnClickLis
                     });
                 }
                 try {
-                    eventsAdaptor.getFilter().filter(newText.toString());
+                    if (eventsArrayList.size() == 0) {
+                        Toast.makeText(getActivity(), "No match Found", Toast.LENGTH_SHORT).show();
 
+                    } else {
+                        eventsAdaptor.getFilter().filter(newText.toString());
+
+                    }
                 } catch (NullPointerException e) {
 
                 }

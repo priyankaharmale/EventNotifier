@@ -73,7 +73,7 @@ public class PastEventsFragment extends Fragment implements View.OnClickListener
     LinearLayout ll_filter;
     Dialog dialog;
     private int mYear, mMonth, mDay, mHour, mMinute;
-    LinearLayout ll_datepicker;
+    LinearLayout ll_datepicker, ll_search;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -103,17 +103,27 @@ public class PastEventsFragment extends Fragment implements View.OnClickListener
         imageViewFilter.setOnClickListener(this);
         imageViewSearch = view.findViewById(R.id.imageView_search);
         ll_datepicker = view.findViewById(R.id.ll_datepicker);
+        ll_search = view.findViewById(R.id.ll_search);
 
-
-        imageViewSearch.setOnClickListener(this);
+        ll_search.setOnClickListener(this);
         ll_datepicker.setOnClickListener(this);
         linearLayout = view.findViewById(R.id.linearLayout_search);
-        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        SearchManager searchManager = ( SearchManager ) getActivity().getSystemService(Context.SEARCH_SERVICE);
         searchView = view.findViewById(R.id.searchView_my_task);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
         searchView.setMaxWidth(Integer.MAX_VALUE);
         // Add Text Change Listener to EditText
         mCloseButton = searchView.findViewById(R.id.search_close_btn);
+
+        mCloseButton.setVisibility(View.VISIBLE);
+
+        mCloseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linearLayout.setVisibility(View.VISIBLE);
+                searchView.setVisibility(View.GONE);
+            }
+        });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -127,10 +137,23 @@ public class PastEventsFragment extends Fragment implements View.OnClickListener
                         public void onClick(View v) {
                             linearLayout.setVisibility(View.VISIBLE);
                             searchView.setVisibility(View.GONE);
+                            getEvents();
+
                         }
                     });
                 }
-                eventsAdaptor.getFilter().filter(query.toString());
+                try {
+                    if (eventsArrayList.size() == 0) {
+                        Toast.makeText(getActivity(), "No match Found", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        eventsAdaptor.getFilter().filter(query.toString());
+
+                    }
+
+                } catch (NullPointerException e) {
+
+                }
                 return false;
             }
 
@@ -146,15 +169,22 @@ public class PastEventsFragment extends Fragment implements View.OnClickListener
                         public void onClick(View v) {
                             linearLayout.setVisibility(View.VISIBLE);
                             searchView.setVisibility(View.GONE);
+                            getEvents();
+
                         }
                     });
                 }
-                try {
-                    eventsAdaptor.getFilter().filter(newText.toString());
 
-                }
-                catch (NullPointerException e)
-                {
+                try {
+                    if (eventsArrayList.size() == 0) {
+                        Toast.makeText(getActivity(), "No match Found", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        eventsAdaptor.getFilter().filter(newText.toString());
+
+                    }
+
+                } catch (NullPointerException e) {
 
                 }
 
@@ -196,7 +226,7 @@ public class PastEventsFragment extends Fragment implements View.OnClickListener
                 //        showAlertDialog();
                 break;
 
-            case R.id.imageView_search:
+            case R.id.ll_search:
                 linearLayout.setVisibility(View.GONE);
                 searchView.setVisibility(View.VISIBLE);
                 break;

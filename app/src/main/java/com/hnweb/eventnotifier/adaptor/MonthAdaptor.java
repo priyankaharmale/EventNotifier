@@ -55,8 +55,8 @@ public class MonthAdaptor extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, logos.get(i),
-                        Toast.LENGTH_SHORT).show();
+                /*Toast.makeText(context, logos.get(i),
+                        Toast.LENGTH_SHORT).show();*/
                 dialog.dismiss();
                 fetchcount(logos.get(i));
 

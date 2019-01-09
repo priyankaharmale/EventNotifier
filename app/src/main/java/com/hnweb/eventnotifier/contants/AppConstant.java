@@ -66,7 +66,14 @@ public class AppConstant {
     /*================================================= Events Booking=========================================================*/
     public static final String API_GET_BOOKINGEVENT = BASE_URL + "event_booking";
     /*=================================================Booking History=========================================================*/
-    public static final String API_GET_BOOKINGHISTORY= BASE_URL + "booking_history";
+    public static final String API_GET_BOOKINGHISTORY = BASE_URL + "booking_history";
+
+    /*=================================================NOTIFICATION =========================================================*/
+    public static String API_NOTIFICATIONLISTING = "http://viyra.com/viyra.com/johnman/event_notifier/index.php/api/Users_api/notification_listing";
+
+    public static String API_NOTIFICATIONCOUNT = "http://viyra.com/viyra.com/johnman/event_notifier/index.php/api/Users_api/notification_count";
+    public static String API_NOTIFICATIONMARKASREAD = "http://viyra.com/viyra.com/johnman/event_notifier/index.php/api/Users_api/notification_mark_as_read";
+
 
     public static String dateToString(Date date, String format) {
         SimpleDateFormat df = new SimpleDateFormat(format);

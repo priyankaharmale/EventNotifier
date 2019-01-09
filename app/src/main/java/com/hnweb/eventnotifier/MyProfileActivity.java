@@ -1,12 +1,10 @@
 package com.hnweb.eventnotifier;
 
 import android.Manifest;
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -17,7 +15,6 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -74,15 +71,11 @@ public class MyProfileActivity extends AppCompatActivity {
     public static final int REQUEST_CAMERA = 5;
     public static File destination;
     protected static final int REQUEST_STORAGE_ACCESS_PERMISSION = 102;
-    String camImage = "", imagePath12;
+    String camImage, imagePath12;
     ImageView iv_editprofile;
-    Bitmap thumbnail;
-
     String isclick = "1";
     Button button_update_profile;
     ImageView iv_backButton;
-    private Uri imageUri;
-    ViewPager mViewPager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -118,7 +111,6 @@ public class MyProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showPictureDialog();
-                //selectedImage();
             }
         });
         iv_backButton.setOnClickListener(new View.OnClickListener() {
@@ -147,7 +139,6 @@ public class MyProfileActivity extends AppCompatActivity {
 
         });
     }
-
 
     private void getUserDetails() {
         loadingDialog.show();
@@ -249,7 +240,7 @@ public class MyProfileActivity extends AppCompatActivity {
 
         MultiPart_Key_Value_Model OneObject = new MultiPart_Key_Value_Model();
         Map<String, String> fileParams = new HashMap<>();
-        if (camImage == null || camImage.equals("")) {
+        if (camImage == null) {
             //  fileParams.put("profile_pic", "");
         } else {
             fileParams.put("profile_photo", camImage);
@@ -311,9 +302,33 @@ public class MyProfileActivity extends AppCompatActivity {
 
 
                                     if (userPhoto.equals("")) {
+
                                         Glide.with(MyProfileActivity.this).load(R.drawable.img_no_pic_navigation).into(iv_profilePic);
                                     } else {
-                                        Glide.with(MyProfileActivity.this).load(userPhoto).into(iv_profilePic);
+                                        try {
+                                            Glide.with(MyProfileActivity.this)
+                                                    .load(userPhoto)
+                                                    .error(R.drawable.img_navigation)
+                                                    .centerCrop()
+                                                    .crossFade()
+                                                    .listener(new RequestListener<String, GlideDrawable>() {
+                                                        @Override
+                                                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                                                            progressBar.setVisibility(View.GONE);
+                                                            return false;
+                                                        }
+
+                                                        @Override
+                                                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                                                            progressBar.setVisibility(View.GONE);
+                                                            return false;
+                                                        }
+                                                    })
+                                                    .into(iv_profilePic);
+                                        } catch (Exception e) {
+                                            Log.e("Exception", e.getMessage());
+                                        }
+
                                     }
 
 
@@ -444,7 +459,7 @@ public class MyProfileActivity extends AppCompatActivity {
     }
 
     public void camerImage() {
-      /*  System.out.println("Click Image11");
+        System.out.println("Click Image11");
         String name = AppConstant.dateToString(new Date(), "yyyy-MM-dd-hh-mm-ss");
         destination = new File(Environment.getExternalStorageDirectory(), name + ".jpg");
 
@@ -453,106 +468,17 @@ public class MyProfileActivity extends AppCompatActivity {
 //        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(destination));
 
         intent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(MyProfileActivity.this, getApplicationContext().getPackageName() + ".my.package.name.provider", destination));
-        startActivityForResult(intent, REQUEST_CAMERA);*/
-
-        ContentValues values = new ContentValues();
-        values.put(MediaStore.Images.Media.TITLE, "New Picture");
-        values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
-        imageUri = getApplicationContext().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-        startActivityForResult(intent, 1);
+        startActivityForResult(intent, REQUEST_CAMERA);
     }
 
 
     public void choosePhotoFromGallary() {
-        /*Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(galleryIntent, GALLERY);*/
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, 2);
-
-
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(galleryIntent, GALLERY);
     }
 
-
-  /*  private void selectedImage() {
-        final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Add Photo!");
-        builder.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                if (options[item].equals("Take Photo")) {
-                    ContentValues values = new ContentValues();
-                    values.put(MediaStore.Images.Media.TITLE, "New Picture");
-                    values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
-                    imageUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                    startActivityForResult(intent, 1);
-                } else if (options[item].equals("Choose from Gallery")) {
-                    Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(intent, 2);
-
-                } else if (options[item].equals("Cancel")) {
-                    dialog.dismiss();
-                }
-            }
-        });
-        builder.show();
-    }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            if (requestCode == 1) {
-
-                try {
-                    thumbnail = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
-                    //imageViewPost.setImageBitmap(thumbnail);
-                    String imageurl = getRealPathFromURI(imageUri);
-                    camImage = imageurl;
-                    //image_path_selected = "1";
-                    //Imageview imageView = (ImageView) findViewById(R.id.image_view);
-                    Glide.with(this).load(imageurl).into(iv_profilePic);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            } else if (requestCode == 2) {
-
-                try {
-                    Uri selectedImage = data.getData();
-                    String[] filePath = {MediaStore.Images.Media.DATA};
-                    Cursor c = getContentResolver().query(selectedImage, filePath, null, null, null);
-                    c.moveToFirst();
-                    int columnIndex = c.getColumnIndex(filePath[0]);
-                    String picturePath = c.getString(columnIndex);
-                    c.close();
-                    thumbnail = (BitmapFactory.decodeFile(picturePath));
-                    camImage = picturePath;
-                    Log.w("pathofimagefromgallery", picturePath + " :: " + thumbnail);
-
-                    Glide.with(this).load(picturePath).into(iv_profilePic);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        }
-    }
-*/
-    private String getRealPathFromURI(Uri imageUri) {
-        String[] proj = {MediaStore.Images.Media.DATA};
-        Cursor cursor = managedQuery(imageUri, proj, null, null, null);
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        return cursor.getString(column_index);
-    }
-
-
-     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
@@ -567,7 +493,6 @@ public class MyProfileActivity extends AppCompatActivity {
                     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                     bm.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
 
-                    // Log.i("Path", imagePath12);
                     FileOutputStream fo;
                     File destination = new File(Environment.getExternalStorageDirectory(),
                             System.currentTimeMillis() + ".jpg");
@@ -581,7 +506,6 @@ public class MyProfileActivity extends AppCompatActivity {
 
                     camImage = imagePath12;
 
-                    //camImage = imageurl;
                     try {
                         Glide.with(MyProfileActivity.this)
                                 .load(camImage)
@@ -606,8 +530,6 @@ public class MyProfileActivity extends AppCompatActivity {
                         Log.e("Exception", e.getMessage());
                     }
                 } catch (IOException e) {
-                    Log.e("Exception", e.getMessage());
-
                     e.printStackTrace();
                     Toast.makeText(MyProfileActivity.this, "Failed!", Toast.LENGTH_SHORT).show();
                 }

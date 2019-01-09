@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -52,6 +53,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.hnweb.eventnotifier.contants.AppConstant;
 import com.hnweb.eventnotifier.fragment.ChangePasswordFragment;
 import com.hnweb.eventnotifier.fragment.HomeFragment;
+import com.hnweb.eventnotifier.fragment.NotificationFragment;
 import com.hnweb.eventnotifier.fragment.PastEventsFragment;
 import com.hnweb.eventnotifier.fragment.PurchaseHistoryFragment;
 import com.hnweb.eventnotifier.fragment.UpcomingEventsFragment;
@@ -69,7 +71,7 @@ import java.util.Map;
 /* * Created by Priyanka H on 24/09/2018.
  */
 
-public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ProfileUpdateModel.OnCustomStateListener, GoogleApiClient.OnConnectionFailedListener {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ProfileUpdateModel.OnCustomStateListener, GoogleApiClient.OnConnectionFailedListener,NotificationUpdateModel.OnCustomStateListener  {
 
     LoadingDialog loadingDialog;
     DrawerLayout drawer;
@@ -87,6 +89,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     ProgressBar progressBar;
     TextView textCartItemCount;
     String mCartItemCount = "";
+    ImageView iv_notification;
     private GoogleApiClient mGoogleApiClient;
 
     @Override
@@ -94,7 +97,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onResume();
         try {
             stateChanged();
-            //getNotificationCount();
+            getNotificationCount();
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -107,6 +110,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        iv_notification=toolbar.findViewById(R.id.iv_notification);
         setSupportActionBar(toolbar);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -146,6 +150,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         imageViewUpload = navHeader.findViewById(R.id.profile_image_photoupload);
 
         imageViewUpload.setVisibility(View.VISIBLE);
+
+
 
      /*   textViewUserName.setText(user_name);
         textViewAdrress.setText(user_street + ", " + user_city);
@@ -217,11 +223,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             //drawerFragment.closeDrawer(GravityCompat.START);
         }
         if (connectionDetector.isConnectingToInternet()) {
-            //  getNotificationCount();
+            getNotificationCount();
         } else {
             Toast.makeText(HomeActivity.this, "No Internet Connection, Please try Again!!", Toast.LENGTH_SHORT).show();
 
         }
+        iv_notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(HomeActivity.this, "Under Development!", Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     private void getdeviceToken() {
@@ -334,16 +347,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-       /* getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.vendor_main, menu);
 
-        liveitemList = menu.findItem(R.id.action_list);
-        liveitemMap = menu.findItem(R.id.action_map);
-        SpannableString sList = new SpannableString(liveitemList.getTitle().toString());
-        SpannableString sMap = new SpannableString(liveitemMap.getTitle().toString());
-        sList.setSpan(new ForegroundColorSpan(Color.WHITE), 0, sList.length(), 0);
-        sMap.setSpan(new ForegroundColorSpan(Color.WHITE), 0, sMap.length(), 0);
-        liveitemList.setTitle(sList);
-        liveitemMap.setTitle(sMap);
+
         final MenuItem menuItem = menu.findItem(R.id.action_notification);
 
         View actionView = MenuItemCompat.getActionView(menuItem);
@@ -354,7 +360,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 onOptionsItemSelected(menuItem);
             }
         });
-*/
+
         return true;
     }
 
@@ -366,16 +372,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-     /*   if (id == R.id.action_message) {
-            Fragment fragment = new MessageFragment();
-
-            if (fragment != null) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                //fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                fragmentManager.beginTransaction().replace(R.id.frame_layout, fragment).addToBackStack(null).commit();
-            }
-
-        } else if (id == R.id.action_notification) {
+         if (id == R.id.action_notification) {
             Fragment fragment = new NotificationFragment();
             if (fragment != null) {
                 FragmentManager fragmentManager = getSupportFragmentManager();
@@ -383,7 +380,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 fragmentManager.beginTransaction().replace(R.id.frame_layout, fragment).addToBackStack(null).commit();
             }
         }
-*/
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -573,7 +570,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-/*
+
     private void getNotificationCount() {
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, AppConstant.API_NOTIFICATIONCOUNT,
@@ -581,14 +578,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
                     @Override
                     public void onResponse(String response) {
-                        Log.d("NotificationCount", response);
+                        Log.d("NotificationResponse", response);
 
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             int message_code = jsonObject.getInt("message_code");
                             String msg = jsonObject.getString("message");
-                            String notification_count = jsonObject.getString("cnt");
-                            Log.d("message_code:- ", String.valueOf(message_code));
+                            String notification_count = jsonObject.getString("count");
+                            Log.d("Notication:-", String.valueOf(message_code));
                             if (message_code == 1) {
                                 //Utils.AlertDialog(MainActivityUser.this, msg);
                                 mCartItemCount = "";
@@ -626,7 +623,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 // the POST parameters:
-                params.put("u_id", user_id);
+                params.put("user_id", user_id);
                 Log.e("NotificationCount ", params.toString());
                 return params;
             }
@@ -636,7 +633,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         postRequest.setShouldCache(false);
         requestQueue.add(postRequest);
     }
-*/
+
 
     private void setupBadge() {
 
@@ -655,10 +652,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-   /* @Override
+    @Override
     public void notificationStateChanged() {
         getNotificationCount();
-    }*/
+    }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {

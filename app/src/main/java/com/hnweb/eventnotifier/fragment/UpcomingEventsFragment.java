@@ -82,7 +82,7 @@ public class UpcomingEventsFragment extends Fragment implements View.OnClickList
     ImageView mCloseButton;
     private ArrayList<Event> eventsArrayList = null;
     EventsAdaptor eventsAdaptor;
-    LinearLayout ll_filter, ll_datepicker;
+    LinearLayout ll_filter, ll_datepicker, ll_search;
     Dialog dialog;
 
     @Override
@@ -111,24 +111,34 @@ public class UpcomingEventsFragment extends Fragment implements View.OnClickList
         ll_filter = view.findViewById(R.id.ll_filter);
         ll_datepicker = view.findViewById(R.id.ll_datepicker);
         imageViewFilter = view.findViewById(R.id.imageView_filter_booked);
-        imageViewFilter.setOnClickListener(this);
         imageViewSearch = view.findViewById(R.id.imageView_search);
+        ll_search = view.findViewById(R.id.ll_search);
 
         radioButton_weekend = view.findViewById(R.id.radioButton_weekend);
         radioButton_All = view.findViewById(R.id.radioButton_All);
         radioButton_today = view.findViewById(R.id.radioButton_today);
         radioButton_Tommorrow = view.findViewById(R.id.radioButton_Tommorrow);
 
-        imageViewSearch.setOnClickListener(this);
+        //    imageViewSearch.setOnClickListener(this);
         ll_datepicker.setOnClickListener(this);
+        ll_search = view.findViewById(R.id.ll_search);
 
+        ll_search.setOnClickListener(this);
         linearLayout = view.findViewById(R.id.linearLayout_search);
-        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        SearchManager searchManager = ( SearchManager ) getActivity().getSystemService(Context.SEARCH_SERVICE);
         searchView = view.findViewById(R.id.searchView_my_task);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
         searchView.setMaxWidth(Integer.MAX_VALUE);
         // Add Text Change Listener to EditText
         mCloseButton = searchView.findViewById(R.id.search_close_btn);
+        mCloseButton.setVisibility(View.VISIBLE);
+        mCloseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linearLayout.setVisibility(View.VISIBLE);
+                searchView.setVisibility(View.GONE);
+            }
+        });
         searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -145,7 +155,18 @@ public class UpcomingEventsFragment extends Fragment implements View.OnClickList
                         }
                     });
                 }
-                eventsAdaptor.getFilter().filter(query.toString());
+                try {
+                    if (eventsArrayList.size() == 0) {
+                        Toast.makeText(getActivity(), "No match Found", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        eventsAdaptor.getFilter().filter(query.toString());
+
+                    }
+
+                } catch (NullPointerException e) {
+
+                }
                 return false;
             }
 
@@ -166,10 +187,13 @@ public class UpcomingEventsFragment extends Fragment implements View.OnClickList
                 }
 
                 try {
-                    eventsAdaptor.getFilter().filter(newText.toString());
+                    if (eventsArrayList.size() == 0) {
+                        Toast.makeText(getActivity(), "No match Found", Toast.LENGTH_SHORT).show();
+                    } else {
+                        eventsAdaptor.getFilter().filter(newText.toString());
+                    }
 
                 } catch (NullPointerException e) {
-
                 }
 
                 return true;
@@ -206,11 +230,9 @@ public class UpcomingEventsFragment extends Fragment implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.imageView_filter_booked:
-                //        showAlertDialog();
-                break;
 
-            case R.id.imageView_search:
+
+            case R.id.ll_search:
                 linearLayout.setVisibility(View.GONE);
                 searchView.setVisibility(View.VISIBLE);
                 break;

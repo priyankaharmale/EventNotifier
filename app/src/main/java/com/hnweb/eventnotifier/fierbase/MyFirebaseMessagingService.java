@@ -69,7 +69,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             JSONObject jsonObject = new JSONObject(remoteMessage.getData());
 
             Log.d("JsonResponse", jsonObject.toString());
-            String type = jsonObject.getString("type");
+            String type = "type";
             String message = jsonObject.getString("message");
             Log.e("JsonResponse", type + " :: " + message);
             Intent resultIntent = new Intent();
@@ -79,7 +79,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             if (type.equals("POST Booking")) {
                 mBuilder = new NotificationCompat.Builder(getApplicationContext());
                 mBuilder.setSmallIcon(R.mipmap.ic_launcher);
-                mBuilder.setContentTitle("UberCuts")
+                mBuilder.setContentTitle("EventNotifier")
                         .setContentText(message)
                         .setAutoCancel(false)
                         .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
@@ -104,7 +104,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             } else if (type.equals("Regular Booking")) {
                 mBuilder = new NotificationCompat.Builder(getApplicationContext());
                 mBuilder.setSmallIcon(R.mipmap.ic_launcher);
-                mBuilder.setContentTitle("UberCuts")
+                mBuilder.setContentTitle("EventNotifier")
                         .setContentText(message)
                         .setAutoCancel(false)
                         .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
@@ -129,7 +129,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             } else if (type.equals("Accepted Task")) {
                 mBuilder = new NotificationCompat.Builder(getApplicationContext());
                 mBuilder.setSmallIcon(R.mipmap.ic_launcher);
-                mBuilder.setContentTitle("UberCuts")
+                mBuilder.setContentTitle("EventNotifier")
                         .setContentText(message)
                         .setAutoCancel(false)
                         .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
@@ -154,7 +154,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             } else if (type.equals("Reject")) {
                 mBuilder = new NotificationCompat.Builder(getApplicationContext());
                 mBuilder.setSmallIcon(R.mipmap.ic_launcher);
-                mBuilder.setContentTitle("UberCuts")
+                mBuilder.setContentTitle("EventNotifier")
                         .setContentText(message)
                         .setAutoCancel(false)
                         .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
@@ -180,7 +180,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             } else if (type.equals("Message")) {
                 mBuilder = new NotificationCompat.Builder(getApplicationContext());
                 mBuilder.setSmallIcon(R.mipmap.ic_launcher);
-                mBuilder.setContentTitle("UberCuts")
+                mBuilder.setContentTitle("EventNotifier")
                         .setContentText(message)
                         .setAutoCancel(false)
                         .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
@@ -205,7 +205,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             } else if (type.equals("Cancelled")) {
                 mBuilder = new NotificationCompat.Builder(getApplicationContext());
                 mBuilder.setSmallIcon(R.mipmap.ic_launcher);
-                mBuilder.setContentTitle("UberCuts")
+                mBuilder.setContentTitle("EventNotifier")
                         .setContentText(message)
                         .setAutoCancel(false)
                         .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
@@ -230,7 +230,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             } else if (type.equals("Rescheduled")) {
                 mBuilder = new NotificationCompat.Builder(getApplicationContext());
                 mBuilder.setSmallIcon(R.mipmap.ic_launcher);
-                mBuilder.setContentTitle("UberCuts")
+                mBuilder.setContentTitle("EventNotifier")
                         .setContentText(message)
                         .setAutoCancel(false)
                         .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
@@ -255,7 +255,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             } else {
                 mBuilder = new NotificationCompat.Builder(getApplicationContext());
                 mBuilder.setSmallIcon(R.mipmap.ic_launcher);
-                mBuilder.setContentTitle("UberCuts")
+                mBuilder.setContentTitle("EventNotifier")
                         .setContentText(message)
                         .setAutoCancel(false)
                         .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
@@ -292,9 +292,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             JSONObject jsonObject = new JSONObject(remoteMessage.getData());
 
             Log.d("JsonResponse", jsonObject.toString());
-            String type = jsonObject.getString("type");
+           //String type = jsonObject.getString("type");
+            String type = "type";
             String message = jsonObject.getString("message");
-            Log.e("JsonResponse", type + " :: " + message);
+          //  Log.e("JsonResponse", type + " :: " + message);
             Intent intent = new Intent();
             PendingIntent pIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
             Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
@@ -305,7 +306,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 // Actions are just fake
                 @SuppressLint({"NewApi", "LocalSuppress"})
                 Notification noti = new Notification.Builder(getApplicationContext())
-                        .setContentTitle("UberCuts")
+                        .setContentTitle("EventNotifier")
                         .setContentText(message)
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentIntent(pIntent)
@@ -325,7 +326,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 // Actions are just fake
                 @SuppressLint({"NewApi", "LocalSuppress"})
                 Notification noti = new Notification.Builder(getApplicationContext())
-                        .setContentTitle("UberCuts")
+                        .setContentTitle("EventNotifier")
                         .setContentText(message)
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentIntent(pIntent)
@@ -345,7 +346,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 // Actions are just fake
                 @SuppressLint({"NewApi", "LocalSuppress"})
                 Notification noti = new Notification.Builder(getApplicationContext())
-                        .setContentTitle("UberCuts")
+                        .setContentTitle("EventNotifier")
                         .setContentText(message)
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentIntent(pIntent)
@@ -365,7 +366,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 // Actions are just fake
                 @SuppressLint({"NewApi", "LocalSuppress"})
                 Notification noti = new Notification.Builder(getApplicationContext())
-                        .setContentTitle("UberCuts")
+                        .setContentTitle("EventNotifier")
                         .setContentText(message)
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentIntent(pIntent)
@@ -385,7 +386,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 // Actions are just fake
                 @SuppressLint({"NewApi", "LocalSuppress"})
                 Notification noti = new Notification.Builder(getApplicationContext())
-                        .setContentTitle("UberCuts")
+                        .setContentTitle("EventNotifier")
                         .setContentText(message)
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentIntent(pIntent)
@@ -405,7 +406,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 // Actions are just fake
                 @SuppressLint({"NewApi", "LocalSuppress"})
                 Notification noti = new Notification.Builder(getApplicationContext())
-                        .setContentTitle("UberCuts")
+                        .setContentTitle("EventNotifier")
                         .setContentText(message)
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentIntent(pIntent)
@@ -425,7 +426,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 // Actions are just fake
                 @SuppressLint({"NewApi", "LocalSuppress"})
                 Notification noti = new Notification.Builder(getApplicationContext())
-                        .setContentTitle("UberCuts")
+                        .setContentTitle("EventNotifier")
                         .setContentText(message)
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentIntent(pIntent)
@@ -442,7 +443,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             } else {
                 @SuppressLint({"NewApi", "LocalSuppress"})
                 Notification noti = new Notification.Builder(getApplicationContext())
-                        .setContentTitle("UberCuts")
+                        .setContentTitle("EventNotifier")
                         .setContentText(message)
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentIntent(pIntent)
