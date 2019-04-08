@@ -84,18 +84,18 @@ public class MyProfileActivity extends AppCompatActivity {
 
         sharedPreferences = getApplicationContext().getSharedPreferences("AOP_PREFS", MODE_PRIVATE);
         userId = sharedPreferences.getString(AppConstant.KEY_ID, null);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = ( Toolbar ) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        iv_backButton = (ImageView) toolbar.findViewById(R.id.iv_backButton);
-        et_firstName = (EditText) findViewById(R.id.et_name);
-        et_emailName = (EditText) findViewById(R.id.et_email_id);
-        et_MobileNo = (EditText) findViewById(R.id.et_phone_no);
-        iv_profilePic = (ImageView) findViewById(R.id.profile_image_edit);
-        iv_user_camerabutton = (ImageView) findViewById(R.id.profile_image_edit_upload);
+        iv_backButton = ( ImageView ) toolbar.findViewById(R.id.iv_backButton);
+        et_firstName = ( EditText ) findViewById(R.id.et_name);
+        et_emailName = ( EditText ) findViewById(R.id.et_email_id);
+        et_MobileNo = ( EditText ) findViewById(R.id.et_phone_no);
+        iv_profilePic = ( ImageView ) findViewById(R.id.profile_image_edit);
+        iv_user_camerabutton = ( ImageView ) findViewById(R.id.profile_image_edit_upload);
 
         button_update_profile = findViewById(R.id.button_update_profile);
 
-        progressBar = (ProgressBar) findViewById(R.id.progress_bar_nav);
+        progressBar = ( ProgressBar ) findViewById(R.id.progress_bar_nav);
 
 
         connectionDetector = new ConnectionDetector(MyProfileActivity.this);
@@ -235,7 +235,158 @@ public class MyProfileActivity extends AppCompatActivity {
     }
 
 
-    public void updateUserData(String camImage) {
+     public void updateUserData(String camImage) {
+         loadingDialog.show();
+
+         MultiPart_Key_Value_Model OneObject = new MultiPart_Key_Value_Model();
+         Map<String, String> fileParams = new HashMap<>();
+         if (camImage == null) {
+             //  fileParams.put("profile_pic", "");
+         } else {
+             fileParams.put("profile_photo", camImage);
+         }
+
+         System.out.println("priya Op" + camImage);
+
+         Map<String, String> stringparam = new HashMap<>();
+
+         stringparam.put("user_id", userId);
+         stringparam.put("name", et_firstName.getText().toString());
+         stringparam.put("phone_no", et_MobileNo.getText().toString());
+
+         OneObject.setUrl(AppConstant.API_UPDATE_USERDEATILS);
+         OneObject.setFileparams(fileParams);
+         System.out.println("fileparam" + fileParams);
+         System.out.println("UTL" + OneObject.toString());
+         OneObject.setStringparams(stringparam);
+         System.out.println("string" + stringparam);
+
+         MultipartFileUploaderAsync someTask = new MultipartFileUploaderAsync(this, OneObject, new OnEventListener<String>() {
+             @Override
+             public void onSuccess(String object) {
+                 loadingDialog.dismiss();
+                 System.out.println("Result" + object);
+                 //    Toast.makeText(getActivity(), "ress" + object, Toast.LENGTH_LONG).show();
+
+                 try {
+                     final JSONObject jsonObject1response = new JSONObject(object);
+                     int flag = jsonObject1response.getInt("message_code");
+
+                     if (flag == 1) {
+
+                         String message = jsonObject1response.getString("message");
+                         AlertDialog.Builder builder = new AlertDialog.Builder(MyProfileActivity.this);
+                         builder.setMessage(message);
+                         builder.setCancelable(false);
+                         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                             @Override
+                             public void onClick(DialogInterface dialog, int which) {
+                                 dialog.cancel();
+
+
+                                 et_firstName.setEnabled(false);
+                                 et_MobileNo.setEnabled(false);
+                                 isclick = "1";
+                                 try {
+
+                                     JSONObject jsonObject = jsonObject1response.getJSONObject("response");
+                                     jsonObject.getString("user_id");
+                                     userEmailId = jsonObject.getString("email_address");
+                                     userfirstName = jsonObject.getString("name");
+                                     userMobileNo = jsonObject.getString("phone_number");
+                                     userPhoto = jsonObject.getString("profile_picture");
+
+                                     et_emailName.setText(userEmailId);
+                                     et_firstName.setText(userfirstName);
+                                     et_MobileNo.setText(userMobileNo);
+
+
+                                     if (userPhoto.equals("")) {
+
+                                         Glide.with(MyProfileActivity.this).load(R.drawable.img_no_pic_navigation).into(iv_profilePic);
+                                     } else {
+                                         try {
+                                             Glide.with(MyProfileActivity.this)
+                                                     .load(userPhoto)
+                                                     .error(R.drawable.img_navigation)
+                                                     .centerCrop()
+                                                     .crossFade()
+                                                     .listener(new RequestListener<String, GlideDrawable>() {
+                                                         @Override
+                                                         public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                                                             progressBar.setVisibility(View.GONE);
+                                                             return false;
+                                                         }
+
+                                                         @Override
+                                                         public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                                                             progressBar.setVisibility(View.GONE);
+                                                             return false;
+                                                         }
+                                                     })
+                                                     .into(iv_profilePic);
+                                         } catch (Exception e) {
+                                             Log.e("Exception", e.getMessage());
+                                         }
+
+                                     }
+
+
+                                     SharedPreferences prefUser = getApplicationContext().getSharedPreferences("AOP_PREFS", MODE_PRIVATE);
+                                     SharedPreferences.Editor editorUser = prefUser.edit();
+                                     editorUser.putString(AppConstant.KEY_NAME, userfirstName);
+                                     editorUser.putString(AppConstant.KEY_EMAIL, userEmailId);
+                                     editorUser.putString(AppConstant.KEY_PHONE, userMobileNo);
+                                     editorUser.putString(AppConstant.KEY_IMAGE, userPhoto);
+
+                                     editorUser.commit();
+
+                                     getUserDetails();
+
+                                 } catch (JSONException e) {
+
+                                 }
+
+
+                             }
+
+
+                         });
+                         android.support.v7.app.AlertDialog alertDialog = builder.create();
+                         alertDialog.show();
+                     } else {
+                         String message = jsonObject1response.getString("message");
+                         AlertDialog.Builder builder = new AlertDialog.Builder(MyProfileActivity.this);
+                         builder.setMessage(message);
+                         builder.setCancelable(false);
+                         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                             @Override
+                             public void onClick(DialogInterface dialog, int which) {
+                                 dialog.cancel();
+                             }
+                         });
+                         android.support.v7.app.AlertDialog alertDialog = builder.create();
+                         alertDialog.show();
+                     }
+
+                 } catch (JSONException e) {
+                     e.printStackTrace();
+                     System.out.println("JSONException" + e);
+                 }
+             }
+
+
+             @Override
+             public void onFailure(Exception e) {
+                 System.out.println("onFailure" + e);
+
+             }
+         });
+         someTask.execute();
+         return;
+     }
+/*
+    public void updateUserDataNew(String camImage) {
         loadingDialog.show();
 
         MultiPart_Key_Value_Model OneObject = new MultiPart_Key_Value_Model();
@@ -243,18 +394,18 @@ public class MyProfileActivity extends AppCompatActivity {
         if (camImage == null) {
             //  fileParams.put("profile_pic", "");
         } else {
-            fileParams.put("profile_photo", camImage);
+            fileParams.put("img", camImage);
         }
 
         System.out.println("priya Op" + camImage);
 
         Map<String, String> stringparam = new HashMap<>();
 
-        stringparam.put("user_id", userId);
-        stringparam.put("name", et_firstName.getText().toString());
-        stringparam.put("phone_no", et_MobileNo.getText().toString());
+        stringparam.put("full_name", "Mike");
+        stringparam.put("email", "mike111taylor@gmail.com");
+        stringparam.put("mobile_no", "9960467888");
 
-        OneObject.setUrl(AppConstant.API_UPDATE_USERDEATILS);
+        OneObject.setUrl("http://tech599.com/tech599.com/johnrahc/ConstructionApp/api/Api/update_user_account");
         OneObject.setFileparams(fileParams);
         System.out.println("file" + fileParams);
         System.out.println("UTL" + OneObject.toString());
@@ -267,8 +418,9 @@ public class MyProfileActivity extends AppCompatActivity {
                 loadingDialog.dismiss();
                 System.out.println("Result" + object);
                 //    Toast.makeText(getActivity(), "ress" + object, Toast.LENGTH_LONG).show();
+          */
+/*
 
-                try {
                     final JSONObject jsonObject1response = new JSONObject(object);
                     int flag = jsonObject1response.getInt("message_code");
 
@@ -368,11 +520,9 @@ public class MyProfileActivity extends AppCompatActivity {
                         android.support.v7.app.AlertDialog alertDialog = builder.create();
                         alertDialog.show();
                     }
+*//*
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    System.out.println("JSONException" + e);
-                }
+
             }
 
 
@@ -385,6 +535,7 @@ public class MyProfileActivity extends AppCompatActivity {
         someTask.execute();
         return;
     }
+*/
 
 
     private void showPictureDialog() {

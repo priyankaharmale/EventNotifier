@@ -9,6 +9,15 @@ public class Event {
     String event_name;
     String event_descr;
     String event_date;
+    String event_endDate;
+
+    public String getEvent_endDate() {
+        return event_endDate;
+    }
+
+    public void setEvent_endDate(String event_endDate) {
+        this.event_endDate = event_endDate;
+    }
 
     public String getTotal_price() {
         return total_price;

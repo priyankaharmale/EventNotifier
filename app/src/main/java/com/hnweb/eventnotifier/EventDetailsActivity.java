@@ -103,8 +103,8 @@ public class EventDetailsActivity extends AppCompatActivity {
 
     MapView mMapView;
     int minteger = 1;
-    int event_total_price;
-    String str_startTime, str_startDate, str_endTime, starttime, str_EventId;
+    float event_total_price;
+    String str_startTime, str_startDate, str_endTime, starttime, str_EventId,str_eventEndDate;
 
     String callFrom;
 
@@ -242,12 +242,13 @@ public class EventDetailsActivity extends AppCompatActivity {
                                     events.setAddress(jsonObject.getString("address"));
                                     events.setEvent_price(jsonObject.getString("price"));
 
-                                    event_total_price = Integer.valueOf(jsonObject.getString("price"));
+                                    event_total_price = Float.valueOf(jsonObject.getString("price"));
                                     str_startTime = jsonObject.getString("event_starttime");
                                     str_endTime = jsonObject.getString("event_endtime");
 
                                     str_EventId = jsonObject.getString("id");
                                     String str_eventstartDate = jsonObject.getString("event_date");
+                                    String str_event_endDate = jsonObject.getString("event_endDate");
 
                                     String pattern = "yyyy-MM-dd";
 
@@ -263,13 +264,21 @@ public class EventDetailsActivity extends AppCompatActivity {
                                     } catch (ParseException e) {
                                         e.printStackTrace();
                                     }
+                                    Date date2 = null;
+                                    try {
+                                        date2 = format1.parse(str_event_endDate);
+                                        str_eventEndDate = formatter.format(date2);
+
+                                    } catch (ParseException e) {
+                                        e.printStackTrace();
+                                    }
 
                                     tv_eventStartDate.setText(str_startDate);
-                                    tv_eventEndDate.setText(str_startDate);
+                                    tv_eventEndDate.setText(str_eventEndDate);
 
 
                                     try {
-                                        SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm:ss");
+                                        SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm");
                                         SimpleDateFormat sdf2 = new SimpleDateFormat("hh:mm a");
                                         Date time = sdf1.parse(str_startTime);
                                         Date endtime = sdf1.parse(str_endTime);
@@ -284,7 +293,6 @@ public class EventDetailsActivity extends AppCompatActivity {
 
 
                                     googleMapView(events.getLatitude(), events.getLongitude(), events.getAddress());
-
                                     tv_eventName.setText(events.getEvent_name());
                                     tv_eventAddress.setText(events.getAddress());
                                     tv_description.setText(events.getEvent_descr());
@@ -620,7 +628,7 @@ public class EventDetailsActivity extends AppCompatActivity {
     public void increaseInteger(TextView displayInteger, TextView tv_totalprice) {
         minteger = minteger + 1;
         displayInteger.setText(String.valueOf(minteger));
-        int total = event_total_price * minteger;
+        float total = event_total_price * minteger;
         tv_totalprice.setText(String.valueOf(total));
 
     }
@@ -631,7 +639,7 @@ public class EventDetailsActivity extends AppCompatActivity {
         } else {
             minteger = minteger - 1;
             displayInteger.setText(String.valueOf(minteger));
-            int total = event_total_price * minteger;
+            float total = event_total_price * minteger;
             tv_totalprice.setText(String.valueOf(total));
            /* event_total_price = event_total_price * minteger;
             tv_totalprice.setText(String.valueOf(event_total_price));*/

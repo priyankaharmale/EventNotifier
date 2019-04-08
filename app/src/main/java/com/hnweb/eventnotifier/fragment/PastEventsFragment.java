@@ -122,6 +122,9 @@ public class PastEventsFragment extends Fragment implements View.OnClickListener
             public void onClick(View v) {
                 linearLayout.setVisibility(View.VISIBLE);
                 searchView.setVisibility(View.GONE);
+                searchView.setQuery("", true);
+
+                getEvents();
             }
         });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -137,6 +140,8 @@ public class PastEventsFragment extends Fragment implements View.OnClickListener
                         public void onClick(View v) {
                             linearLayout.setVisibility(View.VISIBLE);
                             searchView.setVisibility(View.GONE);
+                            searchView.setQuery("", true);
+
                             getEvents();
 
                         }
@@ -144,8 +149,8 @@ public class PastEventsFragment extends Fragment implements View.OnClickListener
                 }
                 try {
                     if (eventsArrayList.size() == 0) {
-                        Toast.makeText(getActivity(), "No match Found", Toast.LENGTH_SHORT).show();
-
+                        textView_noData.setVisibility(View.VISIBLE);
+                        recyclerViewPostedList.setVisibility(View.GONE);
                     } else {
                         eventsAdaptor.getFilter().filter(query.toString());
 
@@ -169,6 +174,8 @@ public class PastEventsFragment extends Fragment implements View.OnClickListener
                         public void onClick(View v) {
                             linearLayout.setVisibility(View.VISIBLE);
                             searchView.setVisibility(View.GONE);
+                            searchView.setQuery("", true);
+
                             getEvents();
 
                         }
@@ -177,8 +184,8 @@ public class PastEventsFragment extends Fragment implements View.OnClickListener
 
                 try {
                     if (eventsArrayList.size() == 0) {
-                        Toast.makeText(getActivity(), "No match Found", Toast.LENGTH_SHORT).show();
-
+                        textView_noData.setVisibility(View.VISIBLE);
+                        recyclerViewPostedList.setVisibility(View.GONE);
                     } else {
                         eventsAdaptor.getFilter().filter(newText.toString());
 
@@ -275,6 +282,7 @@ public class PastEventsFragment extends Fragment implements View.OnClickListener
                                     events.setImage(jsonObject.getString("image"));
                                     events.setCreated_on(jsonObject.getString("created_on"));
                                     events.setEvent_price(jsonObject.getString("price"));
+                                    events.setEvent_endDate(jsonObject.getString("event_endDate"));
 
 
                                     eventsArrayList.add(events);
@@ -360,6 +368,7 @@ public class PastEventsFragment extends Fragment implements View.OnClickListener
                                     events.setImage(jsonObject.getString("image"));
                                     events.setCreated_on(jsonObject.getString("created_on"));
                                     events.setEvent_price(jsonObject.getString("price"));
+                                    events.setEvent_endDate(jsonObject.getString("event_endDate"));
 
                                     eventsArrayList.add(events);
                                     Log.d("ArraySize", String.valueOf(eventsArrayList.size()));
@@ -455,6 +464,7 @@ public class PastEventsFragment extends Fragment implements View.OnClickListener
                                     events.setImage(jsonObject.getString("image"));
                                     events.setCreated_on(jsonObject.getString("created_on"));
                                     events.setEvent_price(jsonObject.getString("price"));
+                                    events.setEvent_endDate(jsonObject.getString("event_endDate"));
 
                                     eventsArrayList.add(events);
                                     Log.d("ArraySize", String.valueOf(eventsArrayList.size()));
@@ -596,6 +606,7 @@ public class PastEventsFragment extends Fragment implements View.OnClickListener
 
                         String date = dayOfMonth + "-" + list_of_count + "-" + year;
                         String date2 = year + "-" + list_of_count + "-" + dayOfMonth;
+
                         Log.e("DateFormatChange", date2);
 
                       /*  DateFormat inputFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -652,6 +663,7 @@ public class PastEventsFragment extends Fragment implements View.OnClickListener
                                     events.setImage(jsonObject.getString("image"));
                                     events.setCreated_on(jsonObject.getString("created_on"));
                                     events.setEvent_price(jsonObject.getString("price"));
+                                    events.setEvent_endDate(jsonObject.getString("event_endDate"));
 
                                     eventsArrayList.add(events);
                                     Log.d("ArraySize", String.valueOf(eventsArrayList.size()));

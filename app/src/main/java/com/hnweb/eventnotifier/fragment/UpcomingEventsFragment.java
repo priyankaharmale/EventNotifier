@@ -137,6 +137,10 @@ public class UpcomingEventsFragment extends Fragment implements View.OnClickList
             public void onClick(View v) {
                 linearLayout.setVisibility(View.VISIBLE);
                 searchView.setVisibility(View.GONE);
+                searchView.setQuery("", true);
+
+                getEvents();
+
             }
         });
         searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
@@ -152,12 +156,16 @@ public class UpcomingEventsFragment extends Fragment implements View.OnClickList
                         public void onClick(View v) {
                             linearLayout.setVisibility(View.VISIBLE);
                             searchView.setVisibility(View.GONE);
+                            searchView.setQuery("", true);
+                            getEvents();
+
                         }
                     });
                 }
                 try {
                     if (eventsArrayList.size() == 0) {
-                        Toast.makeText(getActivity(), "No match Found", Toast.LENGTH_SHORT).show();
+                        textViewList.setVisibility(View.VISIBLE);
+                        recyclerViewPostedList.setVisibility(View.GONE);
 
                     } else {
                         eventsAdaptor.getFilter().filter(query.toString());
@@ -182,13 +190,20 @@ public class UpcomingEventsFragment extends Fragment implements View.OnClickList
                         public void onClick(View v) {
                             linearLayout.setVisibility(View.VISIBLE);
                             searchView.setVisibility(View.GONE);
+                            searchView.setQuery("", true);
+                            getEvents();
+
+
                         }
                     });
                 }
 
                 try {
                     if (eventsArrayList.size() == 0) {
-                        Toast.makeText(getActivity(), "No match Found", Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(getActivity(), "No match Found", Toast.LENGTH_SHORT).show();
+                        textViewList.setVisibility(View.VISIBLE);
+                        recyclerViewPostedList.setVisibility(View.GONE);
+
                     } else {
                         eventsAdaptor.getFilter().filter(newText.toString());
                     }
@@ -282,6 +297,7 @@ public class UpcomingEventsFragment extends Fragment implements View.OnClickList
                                     events.setImage(jsonObject.getString("image"));
                                     events.setCreated_on(jsonObject.getString("created_on"));
                                     events.setEvent_price(jsonObject.getString("price"));
+                                    events.setEvent_endDate(jsonObject.getString("event_endDate"));
 
                                     eventsArrayList.add(events);
                                     Log.d("ArraySize", String.valueOf(eventsArrayList.size()));
@@ -376,6 +392,7 @@ public class UpcomingEventsFragment extends Fragment implements View.OnClickList
                                     events.setImage(jsonObject.getString("image"));
                                     events.setCreated_on(jsonObject.getString("created_on"));
                                     events.setEvent_price(jsonObject.getString("price"));
+                                    events.setEvent_endDate(jsonObject.getString("event_endDate"));
 
                                     eventsArrayList.add(events);
                                     Log.d("ArraySize", String.valueOf(eventsArrayList.size()));
@@ -470,6 +487,7 @@ public class UpcomingEventsFragment extends Fragment implements View.OnClickList
                                     events.setImage(jsonObject.getString("image"));
                                     events.setCreated_on(jsonObject.getString("created_on"));
                                     events.setEvent_price(jsonObject.getString("price"));
+                                    events.setEvent_endDate(jsonObject.getString("event_endDate"));
 
                                     eventsArrayList.add(events);
                                     Log.d("ArraySize", String.valueOf(eventsArrayList.size()));
@@ -563,6 +581,7 @@ public class UpcomingEventsFragment extends Fragment implements View.OnClickList
                                     events.setImage(jsonObject.getString("image"));
                                     events.setCreated_on(jsonObject.getString("created_on"));
                                     events.setEvent_price(jsonObject.getString("price"));
+                                    events.setEvent_endDate(jsonObject.getString("event_endDate"));
 
                                     eventsArrayList.add(events);
                                     Log.d("ArraySize", String.valueOf(eventsArrayList.size()));
@@ -773,6 +792,7 @@ public class UpcomingEventsFragment extends Fragment implements View.OnClickList
                                     events.setImage(jsonObject.getString("image"));
                                     events.setCreated_on(jsonObject.getString("created_on"));
                                     events.setEvent_price(jsonObject.getString("price"));
+                                    events.setEvent_endDate(jsonObject.getString("event_endDate"));
 
                                     eventsArrayList.add(events);
                                     Log.d("ArraySize", String.valueOf(eventsArrayList.size()));
